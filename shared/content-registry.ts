@@ -21,6 +21,22 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
     playbackUrl: "https://vod-limit-media.123flmsfree.com/60e86579c13371f0800d5114c1ca0102/b02d2ba88f6ab009beca46af2ab4a893-ld.m3u8?hdnts=exp=1766264117_acl=/60e86579c13371f0800d5114c1ca0102/*_hmac=6f755fd1bd108f434f0626c0772af153e25556bc2ecac28b42ab2b0f364dc0d3",
     status: ['popular', 'featured']
   },
+{
+    tmdbId: "196322",
+    type: "series",
+    episodes: [
+      { season: 1, episode: 1, url: "https://vod-limit-media.123flmsfree.com/50c4d2061ce571f0bff14177d1c10102/15e035d560ad4eb9aa2b33d88a7341f3-47f9c49261192a1fa96e1c8ca371be1e-ld.m3u8?hdnts=exp=1766264697_acl=/50c4d2061ce571f0bff14177d1c10102/*_hmac=85da1e2a0acbf5faf950556f3215c91c02bf15be083eac53a43ae941f9c6fb1f" },
+      { season: 1, episode: 2, url: "https://vod-limit.cuevanalatino.net/a07e96061ce571f0bfa497c6360c0102/5c2aef8fb2eb45729c8fcc6c264d80ec-3fdd36fbb742347d14dd95b0761b60d8-ld.m3u8?hdnts=exp=1766260922_acl=/a07e96061ce571f0bfa497c6360c0102/*_hmac=2d25e42dc216ec8e3f53d09a08b98003b437753614396c0cf124232732f80a1b" },
+      { season: 1, episode: 3, url: "https://r-limit.flixlat.com/100ad7061ce571f0bfd687c7371d0102/f44cc3e4679b49e48cff60af0cb5b982-47d3bc7b40067a6de0fc80f90161812d-ld.m3u8?hdnts=exp=1766264411_acl=/100ad7061ce571f0bfd687c7371d0102/*_hmac=2774e102b4a4d3897bdd084d48d9520c6947033e084098cdc1253ae6dc17979c" },
+{ season: 1, episode: 4, url: "https://vod-limit.cuevanalatino.net/b09eac061ce571f0a18d5114c0db0102/c6d0f8c8a07e4d1b9080d82450b0b65d-b318efd52f26d91bdd8d85bb248c5406-ld.m3u8?hdnts=exp=1766264793_acl=/b09eac061ce571f0a18d5114c0db0102/*_hmac=b5dc3b1dbc237099a5d5f44df817c30208c766a327021cd28710fafd17e0b7aa" },
+{ season: 1, episode: 5, url: "https://vod-limit.cuevanalatino.net/4033ba061ce571f0bfd036a5e8aa0102/0e73b4b57428471b990915df5641cb34-6967b7924a075563be5b1409583bc1a7-ld.m3u8?hdnts=exp=1766264844_acl=/4033ba061ce571f0bfd036a5e8aa0102/*_hmac=b2cfdb474c00f7b9173b1c85a28bdf96e5ff3bc5afdbe1f5feae384665516487" },
+{ season: 1, episode: 6, url: "https://r-limit.flixlat.com/50b4ab061ce571f0907c5114c1ca0102/379c41ec5529470ba377d7862ad8080c-665fa606a6b1134aef3443fdcf19af80-ld.m3u8?hdnts=exp=1766264866_acl=/50b4ab061ce571f0907c5114c1ca0102/*_hmac=ae5e0197d4407983b78a63d16285394821dc7a65905371d0ca5a8156eca7af20" },
+{ season: 1, episode: 7, url: "https://vod-limit.cuevanalatino.net/3048e7651ce571f0bff14177d1c10102/dd424e93782540259f03cc60245d0b55-10a210b43ff09e4f905ddb0fd8f0d78a-ld.m3u8?hdnts=exp=1766264895_acl=/3048e7651ce571f0bff14177d1c10102/*_hmac=6b7bca0570765e763e34d71ba17bb88435ff14eb00759a6365338856dc91acb8" },
+{ season: 1, episode: 8, url: "https://vod-limit.cuevanalatino.net/c08faa701ce571f0907c5114c1ca0102/50ace15820b64ba48daee6e093e41c82-e3e584c4c64bfd86dc447fb5ba743241-sd.m3u8?hdnts=exp=1766264924_acl=/c08faa701ce571f0907c5114c1ca0102/*_hmac=fdd9ff38eecdfeb2d5a44ec985a68e3815fdf169891251fbd9f07b47b69a210f" },
+{ season: 1, episode: 9, url: "https://vod-limit.cuevanalatino.net/20a063741ce571f0bff14177d1c10102/c371d9dd59204e31831cd2e3a3743062-07ddbc3eafc6c8649e37f41fada906ff-sd.m3u8?hdnts=exp=1766264965_acl=/20a063741ce571f0bff14177d1c10102/*_hmac=1d6f60911d91282f5f425036bc9e81b3cd871cdd76082cce49a7a4e29a01de02" },
+    ],
+    status: ['featured', 'popular', 'classic']
+  },
   {
     tmdbId: "1396",
     type: "series",
