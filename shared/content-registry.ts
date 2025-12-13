@@ -16,6 +16,12 @@ export interface RegisteredContent {
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
   {
+    tmdbId: "1117857",
+    type: "movie",
+    playbackUrl: "https://vod-limit-media.123flmsfree.com/60e86579c13371f0800d5114c1ca0102/b02d2ba88f6ab009beca46af2ab4a893-ld.m3u8?hdnts=exp=1766264117_acl=/60e86579c13371f0800d5114c1ca0102/*_hmac=6f755fd1bd108f434f0626c0772af153e25556bc2ecac28b42ab2b0f364dc0d3",
+    status: ['popular', 'featured']
+  },
+  {
     tmdbId: "1396",
     type: "series",
     episodes: [
