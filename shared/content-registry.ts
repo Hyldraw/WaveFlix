@@ -21,7 +21,33 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
     playbackUrl: "https://vod-limit-media.123flmsfree.com/60e86579c13371f0800d5114c1ca0102/b02d2ba88f6ab009beca46af2ab4a893-ld.m3u8?hdnts=exp=1766264117_acl=/60e86579c13371f0800d5114c1ca0102/*_hmac=6f755fd1bd108f434f0626c0772af153e25556bc2ecac28b42ab2b0f364dc0d3",
     status: ['popular', 'featured']
   },
-{
+{ // Severance
+    tmdbId: "95396",
+    type: "series",
+    episodes: [
+      { season: 1, episode: 1, url: "https://data-limit-c.solo-latino.com/40cbab7b139071f0bfb787c6371c0102/339a2606f6754699b704ac7434bb9c49-2dce5c33744a15bbb90bcc89c53bd28e-sd.m3u8?hdnts=exp=1766271727_acl=/40cbab7b139071f0bfb787c6371c0102/*_hmac=757409bc1854f4a38fe1f8c585f29df73289786d8e53f3c3c2530a94592cb98a" },
+      { season: 1, episode: 2, url: "https://data-limit-c.solo-latino.com/7008028b139071f0bf935014c1ca0102/d83e56ed788a46e8add30c77ba565f07-7324574bea78bd224b0fee8f176efd99-sd.m3u8?hdnts=exp=1766271955_acl=/7008028b139071f0bf935014c1ca0102/*_hmac=cf89fb594ae91a1a339030158cd6b6a00428b93c42caf2ccfc208797f8bd8cfe" },
+      { season: 1, episode: 3, url: "https://vod-limit.cuevanalatino.net/9025b39c139071f0bf935014c1ca0102/2062fc67cbc64a6bbbe93ec0af042a33-6f9140ae26fc78071cad4e6141bae469-sd.m3u8?hdnts=exp=1766271974_acl=/9025b39c139071f0bf935014c1ca0102/*_hmac=ffa924f7eb4a1b2c409ce76b855e009264d2af1336d4f9af77627f49265f0e3d" },
+{ season: 1, episode: 4, url: "https://stream-limit-vid.321moviesfree.com/b0e12ebd139071f0bffb5014c1da0102/ec4acaa431874cc384d26881f3425c1a-7db9e4f252b060f96bc7bb54fe3cdb4c-sd.m3u8?hdnts=exp=1766271991_acl=/b0e12ebd139071f0bffb5014c1da0102/*_hmac=912ef0fefaf84d99cad7128e1603ebde46a3c7503ad04e8f5dd5f17c371da5f7" },
+{ season: 1, episode: 5, url: "https://data-limit-c.solo-latino.com/00e897d0139071f0bf935014c1ca0102/aba17a5dcdcc4908ac98646c266cb813-0db21c10bf9a630111511d85e3f62f5d-sd.m3u8?hdnts=exp=1766272012_acl=/00e897d0139071f0bf935014c1ca0102/*_hmac=619c79dc245cc3b49a8957b1ed0b0c6de5efa74df8734d6661bef00e467cd18e" },
+{ season: 1, episode: 6, url: "https://data-limit-c.solo-latino.com/800c18ed139071f0bffb5014c1da0102/ae623cec9b694cccb4940fbc080a4219-8564e817e1a035ea99163225c636f214-sd.m3u8?hdnts=exp=1766272034_acl=/800c18ed139071f0bffb5014c1da0102/*_hmac=9836c6687f6ccad9575d17ad67726e22cdf7e9fe22728762d8f1f15550e00ba1" },
+{ season: 1, episode: 7, url: "https://vod-limit-stream.dramasfree.com/2071adf8139071f090214177d1c00102/62a1e369911e4c1e8dde233995b99032-f20a2427694c0032d52f2bae829f8873-sd.m3u8?hdnts=exp=1766272060_acl=/2071adf8139071f090214177d1c00102/*_hmac=81487a480a5a4744b495552199c018cc56640f10e282be0175e61f8d2d43cb26" },
+{ season: 1, episode: 8, url: "https://data-limit-c.solo-latino.com/004621fd139071f0bfca2680f9ea0102/63a0667e43334881afd36608a027786f-112632bc543550c835e5ad3dc1967896-sd.m3u8?hdnts=exp=1766272080_acl=/004621fd139071f0bfca2680f9ea0102/*_hmac=c05f2c22b133e8a5d609cfdd27a910f4fbdbc70c90c0a8270d27d254678b65e5" },
+{ season: 1, episode: 9, url: "https://vod-limit.cuevanalatino.net/c018c912139171f0bfb387c7361c0102/77afb2d0311a44f690a75f1441055430-92088bb2f3587c5549e5fcc2b6c38576-sd.m3u8?hdnts=exp=1766272099_acl=/c018c912139171f0bfb387c7361c0102/*_hmac=e9fe2eb59580dfd88209d993a71ab7c9012b9b9df9812f0a522c840ce872c663" },
+{ season: 2, episode: 1, url: "https://data-limit-c.solo-latino.com/d0b2384d106871f0bfad87c6371c0102/596be9c28287415fbedebf0e4929db19-0a30684956745394862c69bf8a2b37f2-sd.m3u8?hdnts=exp=1766266146_acl=/d0b2384d106871f0bfad87c6371c0102/*_hmac=0c48da90f3c6ec477a120e6ec7e30c1015aa259c8bd6d0d816ee0e632463d9e9" },
+{ season: 2, episode: 2, url: "https://data-limit-c.solo-latino.com/50cf7352106871f0bf8d5014c1ca0102/a445c11828ff4fd684ec07d84b7fd26e-8d2caaa3ab02e3562da04c7354f10105-ld.m3u8?hdnts=exp=1766272132_acl=/50cf7352106871f0bf8d5014c1ca0102/*_hmac=3c8f41ebffbad9c1586d978a0f8d8e3bc73f12da04430d0cc6492b61dd122d32" },
+{ season: 2, episode: 3, url: "https://data-limit-c.solo-latino.com/70d6d1a9106871f0bfad87c6371c0102/d74a6c16a2c14af5ab87db1478465b27-045cbe80c59b69390e56dab5462c14e5-sd.m3u8?hdnts=exp=1766272149_acl=/70d6d1a9106871f0bfad87c6371c0102/*_hmac=db6f7c7bdc1c132e06fb4ac95d138a8850efb0562dbc5683fbe5001f71d43501" },
+{ season: 2, episode: 4, url: "https://data-limit-c.solo-latino.com/10cb02ad106871f0bfaa97c6360c0102/f184de33a95840fda2ee9af22e823f59-907c84842e540404f59169ad459228f1-sd.m3u8?hdnts=exp=1766272166_acl=/10cb02ad106871f0bfaa97c6360c0102/*_hmac=f99072403f0ccf7f92738cc9914381bb77f32082dc0eaf71360773f40b17f3d4" },
+{ season: 2, episode: 5, url: "https://data-limit-c.solo-latino.com/f07a91b1106871f0bfad87c6371c0102/97f5f14a0ebe4784ae93fa0a7abca0e7-84ce142b8942d121ba2c68793d8b9f59-sd.m3u8?hdnts=exp=1766272185_acl=/f07a91b1106871f0bfad87c6371c0102/*_hmac=ed0a37bee8f92e25afefd15a65b595a6287b648da4760ccb26588f48a49b045a" },
+{ season: 2, episode: 6, url: "https://vod-limit.cuevanalatino.net/4029d4b1106871f0bfaa97c6360c0102/e41a83f48ec14d9b80780ceec137f52e-df160a7a075d2db3b882f8b03cff2c95-sd.m3u8?hdnts=exp=1766272203_acl=/4029d4b1106871f0bfaa97c6360c0102/*_hmac=16817cc897e039709b202dfb609e0ba3807871b101e0781bb386148b9ba01ac2" },
+{ season: 2, episode: 7, url: "https://data-limit-c.solo-latino.com/c0a408b9106871f0bfed5014c1da0102/5e60e7f3c2ed48258116d055c5805f73-945def3134abfb6d7d7b3a8841943cc0-sd.m3u8?hdnts=exp=1766272219_acl=/c0a408b9106871f0bfed5014c1da0102/*_hmac=05c04367f57aba4c4c22f4024f9b50d2caec9adb78ce1ad2177c56ff0f16e321" },
+{ season: 2, episode: 8, url: "https://data-limit-c.solo-latino.com/50ee1ec4106871f095814177d1c10102/aa81c64450b24870878907676ab52c78-839e461e873b6a8fea91b61d287c8656-sd.m3u8?hdnts=exp=1766272237_acl=/50ee1ec4106871f095814177d1c10102/*_hmac=0b40272beb8e73ebe94388797664bb07ddb4f6027919676ff7b6d1fdce9fa6a3" },
+{ season: 2, episode: 9, url: "https://data-limit-c.solo-latino.com/b0bb530c106971f090174177d1c00102/ff9874c4b18e4e5390720d6239e8400d-0c70fa2db2fcadf852c93cc505e091f1-sd.m3u8?hdnts=exp=1766272255_acl=/b0bb530c106971f090174177d1c00102/*_hmac=852cbcb050882fe61f4855e48aa8ecec16c4f30afa83ddaed57803cd81bb9a5e" },
+{ season: 2, episode: 10, url: "https://data-limit-c.solo-latino.com/f00e5d10106971f0b5195114c1ca0102/5b4d8437514a48aebb4f5b791297c034-12b28bef326dfeef4059329edc7ae5bc-sd.m3u8?hdnts=exp=1766272292_acl=/f00e5d10106971f0b5195114c1ca0102/*_hmac=11ed29846debaac9f4310c9cfa13ab85a665058b93c675b9d000a219fa921cbd" },
+    ],
+    status: ['featured', 'popular', 'classic']
+  }, 
+{ // Dark Matter 
     tmdbId: "196322",
     type: "series",
     episodes: [
