@@ -67,6 +67,12 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
     playbackUrl: "https://example.com/barbie.mp4",
     status: ['popular']
   },
+{
+    tmdbId: "177572",
+    type: "movie",
+    playbackUrl: "https://data-limit-c.solo-latino.com/d03355eb660371f088324177d0d10102/396c3321846240da8f54e7df5abcf0ae-56c2966cc5f3cce87b877bc96d2117dc-ld.m3u8?hdnts=exp=1766245428_acl=/d03355eb660371f088324177d0d10102/*_hmac=b8db56ad3b1637d466677e367c7750d2af196e0082e9d0f11ad257b98a0a72d8",
+    status: ['popular']
+  },
   {
     tmdbId: "438631",
     type: "movie",
