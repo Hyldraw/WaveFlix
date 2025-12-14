@@ -135,6 +135,12 @@
   }
   .scroll-purple { scrollbar-color: #c084fc transparent; }
 
+  .scroll-white::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #a1a1aa, #ffffff);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  .scroll-white { scrollbar-color: #ffffff transparent; }
+
   .backdrop-blur-custom {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
