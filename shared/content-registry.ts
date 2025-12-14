@@ -19,7 +19,19 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
     tmdbId: "1117857",
     type: "movie",
     playbackUrl: "https://vod-limit-media.123flmsfree.com/60e86579c13371f0800d5114c1ca0102/b02d2ba88f6ab009beca46af2ab4a893-ld.m3u8?hdnts=exp=1766264117_acl=/60e86579c13371f0800d5114c1ca0102/*_hmac=6f755fd1bd108f434f0626c0772af153e25556bc2ecac28b42ab2b0f364dc0d3",
-    status: ['popular', 'featured']
+    status: ['popular', 'featured', 'classic']
+  },
+{ // Minecraft: The Movie
+    tmdbId: "950387",
+    type: "movie",
+    playbackUrl: "https://data-limit-c.solo-latino.com/f07b88c55e3171f0bf9f4177d0d10102/ec0843b0bc020c8990fe727507559b16-sd.m3u8?hdnts=exp=1766259869_acl=/f07b88c55e3171f0bf9f4177d0d10102/*_hmac=041991b17e8e4d6b7f490b11032cc9f3e42522ca1eb9c1a50257d8b96aa51398",
+    status: ['popular']
+  },
+{ // Five nights at Freddy's
+    tmdbId: "507089",
+    type: "movie",
+    playbackUrl: "https://vod-limit-media.123flmsfree.com/00fe1a795e1d71f0bfef87c7371d0102/b0b29cfeaa0b4d959982a1029d173e50-d211a3a7d932b6d147da3e39da3ebb9f-sd.m3u8?hdnts=exp=1766255014_acl=/00fe1a795e1d71f0bfef87c7371d0102/*_hmac=51bc82fd988947a82c557ceb228ad6a8f735bf1d1b06dd90b83a9d6f675db3c3",
+    status: ['popular']
   },
 { // Severance
     tmdbId: "95396",
@@ -45,7 +57,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
 { season: 2, episode: 9, url: "https://data-limit-c.solo-latino.com/b0bb530c106971f090174177d1c00102/ff9874c4b18e4e5390720d6239e8400d-0c70fa2db2fcadf852c93cc505e091f1-sd.m3u8?hdnts=exp=1766272255_acl=/b0bb530c106971f090174177d1c00102/*_hmac=852cbcb050882fe61f4855e48aa8ecec16c4f30afa83ddaed57803cd81bb9a5e" },
 { season: 2, episode: 10, url: "https://data-limit-c.solo-latino.com/f00e5d10106971f0b5195114c1ca0102/5b4d8437514a48aebb4f5b791297c034-12b28bef326dfeef4059329edc7ae5bc-sd.m3u8?hdnts=exp=1766272292_acl=/f00e5d10106971f0b5195114c1ca0102/*_hmac=11ed29846debaac9f4310c9cfa13ab85a665058b93c675b9d000a219fa921cbd" },
     ],
-    status: ['featured', 'popular', 'classic']
+    status: ['popular']
   }, 
 { // Dark Matter 
     tmdbId: "196322",
@@ -61,7 +73,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
 { season: 1, episode: 8, url: "https://vod-limit.cuevanalatino.net/c08faa701ce571f0907c5114c1ca0102/50ace15820b64ba48daee6e093e41c82-e3e584c4c64bfd86dc447fb5ba743241-sd.m3u8?hdnts=exp=1766264924_acl=/c08faa701ce571f0907c5114c1ca0102/*_hmac=fdd9ff38eecdfeb2d5a44ec985a68e3815fdf169891251fbd9f07b47b69a210f" },
 { season: 1, episode: 9, url: "https://vod-limit.cuevanalatino.net/20a063741ce571f0bff14177d1c10102/c371d9dd59204e31831cd2e3a3743062-07ddbc3eafc6c8649e37f41fada906ff-sd.m3u8?hdnts=exp=1766264965_acl=/20a063741ce571f0bff14177d1c10102/*_hmac=1d6f60911d91282f5f425036bc9e81b3cd871cdd76082cce49a7a4e29a01de02" },
     ],
-    status: ['featured', 'popular', 'classic']
+    status: ['popular']
   },
   {
     tmdbId: "1396",
