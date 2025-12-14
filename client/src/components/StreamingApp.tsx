@@ -1597,42 +1597,60 @@ export default function StreamingApp() {
         <div className="space-y-8">
           {activeCategory === "home" && (
             <>
-              <ContentSection
-                title="Destaques"
-                items={featuredContent.slice(0, 50)}
-                onDetailsClick={openDetails}
-                onPlayClick={openDetails}
-                onFavoriteClick={toggleFavorite}
-                isInUserList={isInUserList}
-                getPosterImage={getPosterImage}
-                titleColor="text-blue-400"
-                icon={<Clapperboard className="w-8 h-8 text-blue-400 drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]" />}
-                scrollColor="blue"
-              />
-              <ContentSection
-                title="Últimos Filmes"
-                items={movies.slice(0, 15)}
-                onDetailsClick={openDetails}
-                onPlayClick={openDetails}
-                onFavoriteClick={toggleFavorite}
-                isInUserList={isInUserList}
-                getPosterImage={getPosterImage}
-                titleColor="text-red-400"
-                icon={<Crown className="w-8 h-8 text-red-400 drop-shadow-[0_0_10px_rgba(248,113,113,0.8)]" />}
-                scrollColor="red"
-              />
-              <ContentSection
-                title="Últimas Séries"
-                items={series.slice(0, 15)}
-                onDetailsClick={openDetails}
-                onPlayClick={openDetails}
-                onFavoriteClick={toggleFavorite}
-                isInUserList={isInUserList}
-                getPosterImage={getPosterImage}
-                titleColor="text-purple-400"
-                icon={<MonitorPlay className="w-8 h-8 text-purple-400 drop-shadow-[0_0_10px_rgba(192,132,252,0.8)]" />}
-                scrollColor="purple"
-              />
+              {/* Gradient: black -> dark gray -> black for Destaques */}
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6 py-10 bg-gradient-to-b from-black via-zinc-800 to-black">
+                <ContentSection
+                  title="DESTAQUES"
+                  items={featuredContent.slice(0, 50)}
+                  onDetailsClick={openDetails}
+                  onPlayClick={openDetails}
+                  onFavoriteClick={toggleFavorite}
+                  isInUserList={isInUserList}
+                  getPosterImage={getPosterImage}
+                  titleColor="text-white"
+                  scrollColor="white"
+                />
+              </div>
+              {/* Separator line */}
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6">
+                <div className="w-full max-w-4xl mx-auto">
+                  <div className="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent" />
+                </div>
+              </div>
+              {/* Gradient: black -> dark gray -> black for Últimos Filmes */}
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6 py-10 bg-gradient-to-b from-black via-zinc-800 to-black">
+                <ContentSection
+                  title="ÚLTIMOS FILMES"
+                  items={movies.slice(0, 15)}
+                  onDetailsClick={openDetails}
+                  onPlayClick={openDetails}
+                  onFavoriteClick={toggleFavorite}
+                  isInUserList={isInUserList}
+                  getPosterImage={getPosterImage}
+                  titleColor="text-white"
+                  scrollColor="white"
+                />
+              </div>
+              {/* Separator line */}
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6">
+                <div className="w-full max-w-4xl mx-auto">
+                  <div className="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent" />
+                </div>
+              </div>
+              {/* Gradient: black -> dark gray -> black for Últimas Séries */}
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6 py-10 bg-gradient-to-b from-black via-zinc-800 to-black">
+                <ContentSection
+                  title="ÚLTIMAS SÉRIES"
+                  items={series.slice(0, 15)}
+                  onDetailsClick={openDetails}
+                  onPlayClick={openDetails}
+                  onFavoriteClick={toggleFavorite}
+                  isInUserList={isInUserList}
+                  getPosterImage={getPosterImage}
+                  titleColor="text-white"
+                  scrollColor="white"
+                />
+              </div>
             </>
           )}
 
@@ -2123,15 +2141,17 @@ const ContentSection = ({ title, items, onDetailsClick, onPlayClick, onFavoriteC
     if (scrollColor === 'yellow') return 'scroll-yellow';
     if (scrollColor === 'red') return 'scroll-red';
     if (scrollColor === 'purple') return 'scroll-purple';
+    if (scrollColor === 'white') return 'scroll-white';
     return 'scroll-blue';
   };
 
   return (
     <div className="slide-up">
-      <div className="flex items-center justify-center mb-6">
-        <h3 className={`text-2xl md:text-3xl font-bold flex items-center gap-3 ${titleColor || 'text-white'}`} data-testid={`text-section-${title.toLowerCase().replace(/\s+/g, '-')}`}>
-          {icon}
+      <div className="flex items-center justify-start mb-6">
+        <h3 className={`text-xl md:text-2xl font-semibold tracking-widest flex items-center gap-2 ${titleColor || 'text-white'}`} data-testid={`text-section-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+          {icon && icon}
           {title}
+          <span className="text-xl md:text-2xl font-light">&gt;</span>
         </h3>
         {showViewAllButton && onViewAll && (
           <button
@@ -2214,21 +2234,11 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
         </div>
       </div>
 
-      {/* Type badge (Movie/Series) */}
-      {!hideBadge && (
+      {/* Legendado badge - shows if status contains 'Leg' */}
+      {(item as ExtendedContent).status?.includes('Leg') && (
         <div className="absolute top-3 left-3">
-          <span className={`${item.type === 'movie' ? 'bg-blue-600' : 'bg-blue-600'} text-white text-xs px-3 py-1.5 rounded-full font-bold flex items-center space-x-1`} data-testid={`text-type-${item.id}`}>
-            {item.type === 'movie' ? (
-              <>
-                <Film size={14} />
-                <span>Filme</span>
-              </>
-            ) : (
-              <>
-                <Tv size={14} />
-                <span>Série</span>
-              </>
-            )}
+          <span className="bg-yellow-600 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-testid={`text-leg-${item.id}`}>
+            LEG
           </span>
         </div>
       )}
@@ -2259,7 +2269,7 @@ const IMDbIcon = ({ size = 16, className = "" }: { size?: number, className?: st
   <img
     src="https://png.pngtree.com/png-vector/20240914/ourmid/pngtree-3d-yellow-star-on-a-transparent-background-png-image_13837284.png"
     alt="IMDb"
-    width={size * 2}
+    width={size * 1}
     height={size}
     className={className}
     style={{ objectFit: 'contain' }}
