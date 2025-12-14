@@ -1598,8 +1598,8 @@ export default function StreamingApp() {
           {activeCategory === "home" && (
             <>
               <ContentSection
-                title="Lançamentos"
-                items={allContent.filter(item => item.year >= 2024 || item.title.toLowerCase().includes('stranger')).slice(0, 50)}
+                title="Destaques"
+                items={featuredContent.slice(0, 50)}
                 onDetailsClick={openDetails}
                 onPlayClick={openDetails}
                 onFavoriteClick={toggleFavorite}
@@ -1611,7 +1611,7 @@ export default function StreamingApp() {
               />
               <ContentSection
                 title="Últimos Filmes"
-                items={featuredContent.filter(item => item.type === 'movie').slice(0, 20)}
+                items={movies.slice(0, 15)}
                 onDetailsClick={openDetails}
                 onPlayClick={openDetails}
                 onFavoriteClick={toggleFavorite}
@@ -1623,7 +1623,7 @@ export default function StreamingApp() {
               />
               <ContentSection
                 title="Últimas Séries"
-                items={series.slice(0, 20)}
+                items={series.slice(0, 15)}
                 onDetailsClick={openDetails}
                 onPlayClick={openDetails}
                 onFavoriteClick={toggleFavorite}
@@ -2257,7 +2257,7 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
 // Logo oficial do IMDb (kept for consistency, can be replaced if TMDB rating is preferred)
 const IMDbIcon = ({ size = 16, className = "" }: { size?: number, className?: string }) => (
   <img
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/575px-IMDB_Logo_2016.svg.png"
+    src="https://png.pngtree.com/png-vector/20240914/ourmid/pngtree-3d-yellow-star-on-a-transparent-background-png-image_13837284.png"
     alt="IMDb"
     width={size * 2}
     height={size}
