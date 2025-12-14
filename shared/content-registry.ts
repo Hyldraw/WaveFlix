@@ -15,6 +15,144 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
+{ // Batman Begins (2005)
+  tmdbId: "272",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/900fedcf025971f0a0af5014c1da0102/2c1d4c6a56cc42fe9e20276c993642c3-c7d304c766b10ad96561c88b5b6338aa-sd.m3u8?hdnts=exp=1766332647_acl=/900fedcf025971f0a0af5014c1da0102/*_hmac=ed7642b543c7d665416bd882a704da97c87a0b92a2b56694474db1034bd1e080",
+  status: []
+},
+{ // The Dark Knight (2008)
+  tmdbId: "155",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/c05c46ca00a871f0801087c7371d0102/a1ccdf9996244bb692acb716368c1b30-a2e4b416d4e1053081b7b7e65bf11037-sd.m3u8?hdnts=exp=1766326226_acl=/c05c46ca00a871f0801087c7371d0102/*_hmac=7fa93cd1834f475bb2dd5158c20ecec9103dac761186f8014ea523cac2162e6f",
+  status: []
+},
+{ // The Dark Knight Rises (2012)
+  tmdbId: "49026",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/f0f23dd4023471f086454177d1c00102/8be06d8409c947e58b0237f2bfa489a3-b8d55f9891a9a4ca8ca36bc12daa402c-ld.m3u8?hdnts=exp=1766326231_acl=/f0f23dd4023471f086454177d1c00102/*_hmac=3f626ff172b5707a9fa21faf27f814e0bd9bfab305fa0b7e2c92aa8180190068",
+  status: []
+},
+{ // Man of Steel (2013)
+  tmdbId: "49521",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/200084c400ae71f0801187c6371c0102/2a958a84f1f046e385eaea6cdcb38a6f-5ee6884dcc09cb1eb52bc4ce18b07ab2-sd.m3u8?hdnts=exp=1766321568_acl=/200084c400ae71f0801187c6371c0102/*_hmac=bd1a150590444e6de0bb3818ab09116d85940c64af106228a9293ca3e32a34d3",
+  status: []
+},
+{ // Batman v Superman: Dawn of Justice (2016)
+  tmdbId: "209112",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/e01c83c3025971f0a25836a5e8aa0102/c248fd70994741bb9dbac3eddfa0028e-c0b78525b06ac6a0cd278d1f46a9cbcb-ld.m3u8?hdnts=exp=1766327965_acl=/e01c83c3025971f0a25836a5e8aa0102/*_hmac=a35e2b841c73e47a4a95aec878818320ec40f43accc0a93fd1477ff244060669",
+  status: []
+},
+{ // Suicide Squad (2016)
+  tmdbId: "297761",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/20ce8d23023a71f0b1ab5014c1ca0102/6d58f959e68c485ab089b2adf19a5918-977798cbaa97044b43b39eb160c86148-sd.m3u8?hdnts=exp=1766303770_acl=/20ce8d23023a71f0b1ab5014c1ca0102/*_hmac=2b2a8f4d585ea85254272597f7c035ef32b8a0ab01e6c6edf32bb81e09e862e0",
+  status: []
+},
+{ // Wonder Woman (2017)
+  tmdbId: "297762",
+  type: "movie",
+  playbackUrl: "https://vod-limit-res.cuevana.life/70f386eaffde71efbfc686c6360c0102/d271852c4ba34ca4849475b312aa0c92-064c1aff0e15cd2242c53f1bdbd7488d-sd.m3u8?hdnts=exp=1766340178_acl=/70f386eaffde71efbfc686c6360c0102/*_hmac=b79a254e611e7ccd27ed5216e30dc5dce1b62a188b9910b3b6fc5befbab6f68d",
+  status: []
+},
+{ // Justice League (2017)
+  tmdbId: "141052",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/70b0fd9a019471f0801487c6371c0102/bce04447c83a4f558e6e800fa20bbeaf-0162217945f6fad8a76436e6c48ccbc6-sd.m3u8?hdnts=exp=1766345474_acl=/70b0fd9a019471f0801487c6371c0102/*_hmac=750f71798c6d91003d0e10da4987a4438beeefa7f78aa305dba8f3a165b84392",
+  status: []
+},
+{ // Aquaman (2018)
+  tmdbId: "297802",
+  type: "movie",
+  playbackUrl: "https://vod-limit-res.cuevana.life/3097ca4cffdf71ef80265114c0db0102/2c8a48efed5f4f34aa6d27f7c6a442c1-66d5542a03c68e302f5be9ab66b01904-ld.m3u8?hdnts=exp=1766345520_acl=/3097ca4cffdf71ef80265114c0db0102/*_hmac=8fdbe377123ba89a0e6567246ecf9e1575f6d85b09378a24d54d18a0c62c2330",
+  status: []
+},
+{ // Shazam! (2019)
+  tmdbId: "287947",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/706a0943025d71f099444177d0d10102/bbeb42e937c54bda91349a0c348bd397-98bfb5d66e2ef122a0db781a315936db-sd.m3u8?hdnts=exp=1766317985_acl=/706a0943025d71f099444177d0d10102/*_hmac=c69d341675bab92fa85e7e85d38f75837c27550156659be5a0c59089a7c56a44",
+  status: []
+},
+{ // Birds of Prey (2020)
+  tmdbId: "495764",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/20152aa1017071f0bfc986c6360c0102/cd2b0830db7646058b203c47d9b628bf-4e45bc855459c3bf244a80705651ca69-sd.m3u8?hdnts=exp=1766328081_acl=/20152aa1017071f0bfc986c6360c0102/*_hmac=211d6a2e30835663110211c3af692d5bc0742e348bf81d56e0390456f94aaf54",
+  status: []
+},
+{ // Wonder Woman 1984 (2020)
+  tmdbId: "464052",
+  type: "movie",
+  playbackUrl: "https://vod-limit-res.cuevana.life/f098b1bfffdc71efbfbf4177d1c10102/93fe8b0e8b1442de9c1f330ab1a51b0a-67f23e12363391bb0eb22978604fd031-sd.m3u8?hdnts=exp=1766341739_acl=/f098b1bfffdc71efbfbf4177d1c10102/*_hmac=b4052eb7163245cc63a027b79376465b0f5622263391e7a3e5b089e8a9c78336",
+  status: []
+},
+{ // Zack Snyder's Justice League (2021)
+  tmdbId: "791373",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/903c8fd8046171f0bffd87c6371c0102/19188bad8a544cedbe46f3ad3b024859-e22b78681eb2adf3a3d88a7e334edea4-ld.m3u8?hdnts=exp=1766345832_acl=/903c8fd8046171f0bffd87c6371c0102/*_hmac=d68f4f25847196146b0a2741d9427f397e297eb29b3fdbbd202d9c1f85f1d477",
+  status: []
+},
+{ // The Suicide Squad (2021)
+  tmdbId: "436969",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/b0d4081fffe971efbfc65114c1ca0102/fc62bd461a5c4fbb95d85884c727c712-64a3b17d3318cdaaa007e2d0bb409fba-ld.m3u8?hdnts=exp=1766345248_acl=/b0d4081fffe971efbfc65114c1ca0102/*_hmac=cc9582d997df5b869959902837b410ab0b297257d7ae6febfae204981a1cab6c",
+  status: []
+},
+{ // The Batman (2022)
+  tmdbId: "414906",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/500df22a00a771f086444177d1c00102/0521f9f727e7462cbc8fff02409beef1-6b967ce17a11a14208e326955c81350c-sd.m3u8?hdnts=exp=1766343505_acl=/500df22a00a771f086444177d1c00102/*_hmac=9d1ede4dcf6f29bbbb6d66d0f07f04a8312265fca5cd02ede62df967047283c6",
+  status: []
+},
+{ // Black Adam (2022)
+  tmdbId: "436270",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/20a0e93300a871f099434177d0d10102/ce6bf80e8efa49f5a9545b795c13a5ba-77df297d19160e4fa655ea7104385094-sd.m3u8?hdnts=exp=1766327718_acl=/20a0e93300a871f099434177d0d10102/*_hmac=4f85703361dcd4e68124dc58fa7207cc7398c7aca788de0a3afdc22af3d840b9",
+  status: []
+},
+{ // Shazam! Fury of the Gods (2023)
+  tmdbId: "594767",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/a024ce93025d71f0955b87c7361c0102/a0b42e7af00f4248b5fa57222c8c935a-055a9dfc7f5dc5722f031bd132ae8ad2-sd.m3u8?hdnts=exp=1766329625_acl=/a024ce93025d71f0955b87c7361c0102/*_hmac=9f54d43ebcd32c75836a57933e5aab9b1b3624ea5672009463db2b7a61af0f23",
+  status: []
+},
+{ // The Flash (2023)
+  tmdbId: "298618",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/6024d380ffd671ef955887c7361c0102/6c2b5a8935fb49b99082b947b9f5e590-e0313a9a3e11837ae7843b73cbc02476-sd.m3u8?hdnts=exp=1766325441_acl=/6024d380ffd671ef955887c7361c0102/*_hmac=deb47f876b5d6d25872decfcbb31085fda9e98bf89a1423b959c3bbf03bccbc9",
+  status: []
+},
+{ // Blue Beetle (2023)
+  tmdbId: "565770",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/50b309b8016a71f0955b87c7361c0102/b056bab59e974417a75d3c6a95418d44-78b08e9803347f09cf9538959e42ee74-sd.m3u8?hdnts=exp=1766329021_acl=/50b309b8016a71f0955b87c7361c0102/*_hmac=dc61210da230f250bb3dd5153889e31068bf0d584fcba3a307cb5b89e6c46648",
+  status: []
+},
+{ // Aquaman and the Lost Kingdom (2023)
+  tmdbId: "572802",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/20838329683771f0a02587c6371c0102/1ddcedf989154e2b895e844382b5d619-4c74ab40eda5ab63fa9766304304625b-sd.m3u8?hdnts=exp=1766337836_acl=/20838329683771f0a02587c6371c0102/*_hmac=056a0066b158675a4f1808f0b046b20d4bfedd4eceb446865b556d026a5be602",
+  status: []
+},
+{ // Joker (2019)
+  tmdbId: "475557",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/70063f5f2f1571f0b71a5014c1ca0102/4ee44e06454a4e79992b4c0d565e5c9d-f56cc0e7cdda41afcad50146f57feb42-sd.m3u8?hdnts=exp=1766319234_acl=/70063f5f2f1571f0b71a5014c1ca0102/*_hmac=85aa0c6fb01239d79de635bc385fa6cecbb40aa5c4a19e95d6605d5799cd91ca",
+  status: []
+},
+{ // Joker: Folie à Deux (2024)
+  tmdbId: "1125311",
+  type: "movie",
+  playbackUrl: "https://delivery-limit-c.123pelicula.com/108284fea87d71ef80115114c0db0102/606290e4df414537a62d419d3c0279e7-fb89cf666110b8ea29e95d0fd108e605-sd.m3u8?hdnts=exp=1766326906_acl=/108284fea87d71ef80115114c0db0102/*_hmac=d02929e2dd74e3f436a562146e8a6e2283b216364ed8e9b08698e76b29b5603e",
+  status: []
+},
+{ // Superman (2025)
+  tmdbId: "1094556",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/10c01edb8d2471f0800b4177d1c00102/c156a285f3c3f50fa51e2a411472c2c0-sd.m3u8?hdnts=exp=1766323109_acl=/10c01edb8d2471f0800b4177d1c00102/*_hmac=437ae5ff5320b66f175c7ef153cae3734c32c6f30855f812e92136aefdd0ea43",
+  status: []
+},
 { // Iron Man (2008)
   tmdbId: "1726",
   type: "movie",
