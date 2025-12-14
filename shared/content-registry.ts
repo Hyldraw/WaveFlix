@@ -15,6 +15,222 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
+{ // Iron Man (2008)
+  tmdbId: "1726",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/90720646678e71f0949e97c6360c0102/1a5d78d32235403f9c0968f94c87962d-d00f78837f33a9bc356bc5cd7b71c3a2-ld.m3u8?hdnts=exp=1766310650_acl=/90720646678e71f0949e97c6360c0102/*_hmac=1f08c97710464bc9e193b5f622edf7bb5b7dd5d09a8b3a086318a845b3c654e4",
+  status: []
+},
+{ // The Incredible Hulk (2008)
+  tmdbId: "1724",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/00662a46316f71f0a5155014c1ca0102/e314f4efcb26460987d2f65635b102aa-6f9e1bea71016501c5bf3a90e4a4664c-sd.m3u8?hdnts=exp=1766305507_acl=/00662a46316f71f0a5155014c1ca0102/*_hmac=1bbba55f971b5ac3d3c869cad3b46a43ffd5d95d90e7c5b9661a01e85cd922ec",
+  status: []
+},
+{ // Iron Man 2 (2010)
+  tmdbId: "10138",
+  type: "movie",
+  playbackUrl: "https://vod-limit-res.cuevana.life/20092851480571f0bfb22680f9ea0102/50b785464a76496d8cd2788602c14478-617a380a4b18cedab285b76e9699dc12-sd.m3u8?hdnts=exp=1766338161_acl=/20092851480571f0bfb22680f9ea0102/*_hmac=7dd364184d4739a886c84620c34728494413d28c859098033a03be9bd2a0d7d6",
+  status: []
+},
+{ // Thor (2011)
+  tmdbId: "10195",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/80451b751c2371f0a1895114c0db0102/f5d81c55cbdc47eda6e2fe77965ec972-b4f7cd99454837da62d7e58545c80020-sd.m3u8?hdnts=exp=1766310831_acl=/80451b751c2371f0a1895114c0db0102/*_hmac=ef79f7308b386fdff34946d4ced7d1562e60755c179548b86efd62d8d6b719cd",
+  status: []
+},
+{ // Captain America: The First Avenger (2011)
+  tmdbId: "1771",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/80a0045f0c6e71f0913a5014c1da0102/0ca141234bfd4f1b981f8c11f5024ae6-d176ee989380c71fce0f38bc5e5060d2-sd.m3u8?hdnts=exp=1766338401_acl=/80a0045f0c6e71f0913a5014c1da0102/*_hmac=c61ebe40863038e13193d46b4c16266f35ee50d051356d5dd9db1b3632c88c15",
+  status: []
+},
+{ // The Avengers (2012)
+  tmdbId: "24428",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/6004b4b6240671f0bfef87c7361c0102/265f10cf3e0a4b70a30c77927591d106-61649e8a2ae5e466ddaeca83406d6e0d-sd.m3u8?hdnts=exp=1766320658_acl=/6004b4b6240671f0bfef87c7361c0102/*_hmac=796c9b25954280dabf94bfd060f3f8bdfa7e2e78dee87685987edfb92700a798",
+  status: []
+},
+{ // Iron Man 3 (2013)
+  tmdbId: "68721",
+  type: "movie",
+  playbackUrl: "https://vod-limit-res.cuevana.life/90b398c7767571f0bfe04177d1c00102/0474e61f5d3edee193eb0534de3fc5f9-ld.m3u8?hdnts=exp=1766335762_acl=/90b398c7767571f0bfe04177d1c00102/*_hmac=e9693d78a1adaac6033818581bbaf9777a735999bad21bba728dd94a80ba4c00",
+  status: []
+},
+{ // Thor: The Dark World (2013)
+  tmdbId: "76338",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/908a16751c2371f0bfa187c7361c0102/a764c07525d1485baf058b8c352703b9-40f335d31569d805481141b887bddaaa-sd.m3u8?hdnts=exp=1766328022_acl=/908a16751c2371f0bfa187c7361c0102/*_hmac=e716097d3c6b2d5a49f6d7b7e7e4a118c137e3b8ad374ce7ae7cdd4086962773",
+  status: []
+},
+{ // Captain America: The Winter Soldier (2014)
+  tmdbId: "100402",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/50eb1d940c6e71f09e8c4177d1c10102/28489eb492584a949cc96148328c00ee-75ec9ccf018bb948de68018c349fa9aa-ld.m3u8?hdnts=exp=1766338437_acl=/50eb1d940c6e71f09e8c4177d1c10102/*_hmac=040906ed596e2918c33b46e66c534fff5be3e43d343b5f01dfb312d9bca681b6",
+  status: []
+},
+{ // Guardians of the Galaxy (2014)
+  tmdbId: "118340",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/f001a5f00d3c71f085895114c1ca0102/8e9d857c30c1461e8b402638b5c76e8b-e2f59b2e4d1063d56c5b644c54e70bd5-sd.m3u8?hdnts=exp=1766320693_acl=/f001a5f00d3c71f085895114c1ca0102/*_hmac=ac3bf08fd6578c94d64232afb5fae33005cbc4874712f6e3aa45b505270d43b3",
+  status: []
+},
+{ // Avengers: Age of Ultron (2015)
+  tmdbId: "99861",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/50c250e3686d71f0b7325014c1ca0102/fe9c9489b09a4eda91687510d0dca70c-45c705a86e870b8d82771134b4273731-ld.m3u8?hdnts=exp=1766318224_acl=/50c250e3686d71f0b7325014c1ca0102/*_hmac=da7891296ce04e04b3c8903648ed74b50496e0b7566aefc06a3fc34b813faa93",
+  status: []
+},
+{ // Ant-Man (2015)
+  tmdbId: "102899",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/806ef6960e1571f080085014c1ca0102/401212b7b968420b82fa24714322c6e4-701beab7316d4b5cab5b085ae31b70d7-sd.m3u8?hdnts=exp=1766338790_acl=/806ef6960e1571f080085014c1ca0102/*_hmac=98063e25335bc931ea5e5e22fb51de04e5c6b59f09b448c823778328ae5ccb07",
+  status: []
+},
+{ // Captain America: Civil War (2016)
+  tmdbId: "271110",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/d0b52509686471f0bf955014c1da0102/e928aec1b2c7448fbd49f86a107e1445-79473d7b42402b7b65a186cd3ffd652b-sd.m3u8?hdnts=exp=1766338451_acl=/d0b52509686471f0bf955014c1da0102/*_hmac=9d6b06fbf71fe99fcc1171de46b63478386e99be62ce1765467d6a0b42c63c33",
+  status: []
+},
+{ // Doctor Strange (2016)
+  tmdbId: "284052",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/606788b40c8471f0ba3486c6360c0102/79997b6f4426432a82ef9a2545d627b1-6f27a4f8cea042e91f020c87f9349870-sd.m3u8?hdnts=exp=1766338901_acl=/606788b40c8471f0ba3486c6360c0102/*_hmac=35e13d5adfd0ae4be9e762a81db64d3a40ba254a752fa160005f73e751a0ee69",
+  status: []
+},
+{ // Guardians of the Galaxy Vol. 2 (2017)
+  tmdbId: "283995",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/b0507cd80d3c71f0bfa836a5e8aa0102/6be09c3de5c54ca782f3846c51416ff5-c2f5d9b533aaba0b953a3527b36c0acf-ld.m3u8?hdnts=exp=1766322146_acl=/b0507cd80d3c71f0bfa836a5e8aa0102/*_hmac=6639f68569e3c80610a5467c7ed05aa88ecafdca51e9d6c1ee4a8121a033f2af",
+  status: []
+},
+{ // Spider-Man: Homecoming (2017)
+  tmdbId: "315635",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/50024da91f4b71f0bffd4177d0d10102/73669720362c489596b3549dc823c148-15cbb6fd9786aee5c879e9d3e1b0b755-ld.m3u8?hdnts=exp=1766323215_acl=/50024da91f4b71f0bffd4177d0d10102/*_hmac=b285243334e475cebbf59d68f272553b0ef547cad74a5fc8259f6875742793e3",
+  status: []
+},
+{ // Thor: Ragnarok (2017)
+  tmdbId: "284053",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/70a094884b3f71f0bfc55114c0db0102/3be68ebe2e5e44ffa52d841c53be82bf-838a0134b7873b2e67e30179d737d58d-ld.m3u8?hdnts=exp=1766333243_acl=/70a094884b3f71f0bfc55114c0db0102/*_hmac=b02001340f93dcd55539d4f812d8747f897aae29aa57eba9ba42b0278e3c4174",
+  status: []
+},
+{ // Black Panther (2018)
+  tmdbId: "284054",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/600d47e80c4671f09e8c4177d1c10102/b053e0bf86d848de882e72374d37e681-2a8710e74e1deec5f965885ba7bf7c1f-sd.m3u8?hdnts=exp=1766318912_acl=/600d47e80c4671f09e8c4177d1c10102/*_hmac=aec76e2db2a97ddcf7a816402235fe3af07de7d1b585a3dde23e194916012a60",
+  status: []
+},
+{ // Avengers: Infinity War (2018)
+  tmdbId: "299536",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/401ff492620b71f0b1802680f9ea0102/8be48ac6f88940e5a557533a4a2dffc3-dd85e86f7403ecb98ecb1b9fb6ae594c-sd.m3u8?hdnts=exp=1766334939_acl=/401ff492620b71f0b1802680f9ea0102/*_hmac=f55bee2e5f63bdf7f386f7c8a67cb5876211edd1ba227e4e304ef276f7ed1b97",
+  status: []
+},
+{ // Ant-Man and the Wasp (2018)
+  tmdbId: "363088",
+  type: "movie",
+  playbackUrl: "https://delivery-limit-c.123pelicula.com/80818d650e1571f08e492680f9ea0102/67fa5f70d0dc49bc97b6f1e28228bdd1-03efddedca26a2a52a19d5d49bd346f5-ld.m3u8?hdnts=exp=1766338824_acl=/80818d650e1571f08e492680f9ea0102/*_hmac=be16a21ab1f54e2ec3c0672f25f73f780d1ef48549856bd621c743fe9d0c68b5",
+  status: []
+},
+{ // Captain Marvel (2019)
+  tmdbId: "299537",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/8028185f0c6e71f0bfa536a5e8aa0102/df1f6e9173d744d698f4d63911b615af-9418e7609fb87cf1317267bef5c69e2b-ld.m3u8?hdnts=exp=1766333502_acl=/8028185f0c6e71f0bfa536a5e8aa0102/*_hmac=c2775e2e46d2d9f355ef59cfeba80cf97d7e8baaa5380e3db7f4f567b8f9b01a",
+  status: []
+},
+{ // Avengers: Endgame (2019)
+  tmdbId: "299534",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/a04e3268637b71f0bfce5114c1ca0102/8205a27f3bf9419d8c41630d8f3f3bdc-9965c5f5b41d315318069fc91a5704e6-ld.m3u8?hdnts=exp=1766338652_acl=/a04e3268637b71f0bfce5114c1ca0102/*_hmac=45ee949038ee5113c2bd1ed49e2a42d56f2a6a4ae4365242ee068e9ae2a4ceb4",
+  status: []
+},
+{ // Spider-Man: Far From Home (2019)
+  tmdbId: "429617",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/40e50e704fd871f0bc2d87c7361c0102/7774bc415ef2424a8db1eb4db954e15e-dc657d51a3275f67521c15bca78dae08-sd.m3u8?hdnts=exp=1766321702_acl=/40e50e704fd871f0bc2d87c7361c0102/*_hmac=22437e8fa9da349b0f5571c19774106b93e92a86ddf14daf10fcf1243944507b",
+  status: []
+},
+{ // Black Widow (2021)
+  tmdbId: "497698",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/70e8df8e0c4971f09e8c4177d1c10102/e4452146e3cc4e189f6047b2f47ba800-2e50dc097a4dae6bdad178fd153532a6-sd.m3u8?hdnts=exp=1766339440_acl=/70e8df8e0c4971f09e8c4177d1c10102/*_hmac=408b9f5f3095a8a4a912e7d57048ed0e74d30692afc4c85fc0af7eb076e7ec4e",
+  status: []
+},
+{ // Shang-Chi and the Legend of the Ten Rings (2021)
+  tmdbId: "566525",
+  type: "movie",
+  playbackUrl: "https://delivery-limit-c.123pelicula.com/a0812799202471f0bfd45014c1da0102/2daf5abf72e74a70a8c3dc2c3dd63d60-d87c89c4f953651772d4f3aed985bbed-sd.m3u8?hdnts=exp=1766322052_acl=/a0812799202471f0bfd45014c1da0102/*_hmac=6baaf3121566848f906693923026cd910613bd6e6b6c512b714a7fc249a6970e",
+  status: []
+},
+{ // Eternals (2021)
+  tmdbId: "524434",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/d07152df0d3771f0bfc087c7371d0102/ee8fd5798d604e8a85d0d20fefc30487-fd9e493a5c3aa3cddc64f46bb7028c20-sd.m3u8?hdnts=exp=1766318393_acl=/d07152df0d3771f0bfc087c7371d0102/*_hmac=831f39a5be13ce1196e1b53812fa06f815378cdabe94d14187113beae5c2ab48",
+  status: []
+},
+{ // Spider-Man: No Way Home (2021)
+  tmdbId: "634649",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/5049aee4ec5471ef803c5014c1da0102/6d50768eb9ab46caa66ee2b8bb157d7b-2f54f03bc0512135e6036389e683fdf3-ld.m3u8?hdnts=exp=1766335274_acl=/5049aee4ec5471ef803c5014c1da0102/*_hmac=39fcad14be349ae0180a4ccf64a60f263fd40b5bda92e0313d8ddc7eea9e5a55",
+  status: []
+},
+{ // Doctor Strange in the Multiverse of Madness (2022)
+  tmdbId: "453395",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/405ebbb40c8471f0bfc24177d0d10102/d0e83320f9094ea5b7e8b33f29ffbc79-08ced09063d63f3de33a56194d25850c-sd.m3u8?hdnts=exp=1766338935_acl=/405ebbb40c8471f0bfc24177d0d10102/*_hmac=25260b4a6bee701556305f0d88ea26694776c5376d559df69dcdb4092755c01a",
+  status: []
+},
+{ // Thor: Love and Thunder (2022)
+  tmdbId: "616037",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/c0692f751c2371f0b22d5014c1ca0102/f0ae21e220794ac3b52fc5e735d4a34b-e77959824864742949cd01d4f4c83a92-sd.m3u8?hdnts=exp=1766327555_acl=/c0692f751c2371f0b22d5014c1ca0102/*_hmac=5a93e35b4d742e295f5ead6a98d46a5637f4f9186e4734a7d036b2a2f742d276",
+  status: []
+},
+{ // Black Panther: Wakanda Forever (2022)
+  tmdbId: "505642",
+  type: "movie",
+  playbackUrl: "https://media-limit-xr8a2.peliculaplay.com/806974e80c4771f0ba3386c6360c0102/02654674153845a0a0716da66dfee750-9cc5f837dcbe2151fca90c5636d5ab2c-ld.m3u8?hdnts=exp=1766315254_acl=/806974e80c4771f0ba3386c6360c0102/*_hmac=c3c26fa8cc7c73348ebe6add7d023c9dbc6dc8c10b17bb12e33ee05e18e432db",
+  status: []
+},
+{ // Ant-Man and the Wasp: Quantumania (2023)
+  tmdbId: "640146",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/20aca0540dd071f0bfc44177d0d10102/bd099818b39c4a20bf2a27b64ef885ea-db33d86e60ce5c710a6e3a59fe73dffb-ld.m3u8?hdnts=exp=1766338841_acl=/20aca0540dd071f0bfc44177d0d10102/*_hmac=4064d58e64051f8a4d5e7f8d1f65b1ecf9d4b727330e3ca6afc8c0d0dd1f123e",
+  status: []
+},
+{ // Guardians of the Galaxy Vol. 3 (2023)
+  tmdbId: "447365",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/00333bb50d3c71f080075014c1ca0102/485138b191844a04b04f39a78d54afe7-a4babd88d80007be858662819df900b2-ld.m3u8?hdnts=exp=1766321180_acl=/00333bb50d3c71f080075014c1ca0102/*_hmac=0daebd1691c6bf2c3a8fa816eb981ee24772cf67197688c72e35266cf67e5540",
+  status: []
+},
+{ // The Marvels (2023)
+  tmdbId: "609681",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/80fd415724d271f0814e4177d1c00102/d939f6166aa44403b723ca0b2db522e9-2ced2e69cf5d62b5c745fc71aaac4eb7-sd.m3u8?hdnts=exp=1766315739_acl=/80fd415724d271f0814e4177d1c00102/*_hmac=d3b86feb14af7e098496674f4d9f49a51339016004ea9c112c4ad69dfa179c5e",
+  status: []
+},
+{ // Deadpool & Wolverine (2024)
+  tmdbId: "533535",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/80d21458a87e71efa68f87c6371c0102/f21ddae12d6b49ed81939fd55c00ad90-fb25cc09f51d3febc795add44a718709-sd.m3u8?hdnts=exp=1766295132_acl=/80d21458a87e71efa68f87c6371c0102/*_hmac=353615efb1cbdec29b0d101a62bd7b8ffe7dc6438032cf1812ef2577f562ab9a",
+  status: []
+},
+{ // Captain America: Brave New World (2025)
+  tmdbId: "822119",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/30d04e4a19a671f0801a86c6360c0102/7752985b78cf49e9a16da374d244d6de-e6c0080a7ba5e5184ae6c6789ac3d6fe-sd.m3u8?hdnts=exp=1766340179_acl=/30d04e4a19a671f0801a86c6360c0102/*_hmac=de2fd8189cd1711f8423dd13c699652b07e609350b661d911e0c4fe933990621",
+  status: []
+},
+{ // Thunderbolts* (2025)
+  tmdbId: "986056",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/d0bbbafa8d2a71f0bb9d86c6360c0102/8c1762480027a4fb19d7f8a172c6ba38-sd.m3u8?hdnts=exp=1766337781_acl=/d0bbbafa8d2a71f0bb9d86c6360c0102/*_hmac=ea0253e6b438da66705dd86901fcd738e02f052feff3c96663a23ea68ae7f957",
+  status: []
+},
   { // Tá chovendo hambúrguer
     tmdbId: "22794",
     type: "movie",
