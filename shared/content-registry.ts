@@ -15,7 +15,21 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
-  { // Nos seus sonhos
+  { // Pluribus
+    tmdbId: "225171",
+    type: "series",
+    episodes: [
+      { season: 1, episode: 1, url: "https://vod-limit.cuevanalatino.net/8011ae00bb9e71f0bfb897c6360c0102/2b72624d3a9d77e7f740c224b988b92e-sd.m3u8?hdnts=exp=1766299784_acl=/8011ae00bb9e71f0bfb897c6360c0102/*_hmac=bdb2b7cb782de9d0af1f5de0f3adc08e52f9be0dd2d50ee6949face85501dd37" },
+      { season: 1, episode: 2, url: "https://r-limit.flixlat.com/b08bff00bdf571f0bfb997c6360c0102/f02703d7818dcdb57b5de8d36f478c49-sd.m3u8?hdnts=exp=1766299798_acl=/b08bff00bdf571f0bfb997c6360c0102/*_hmac=353fa0110a274e0b036682a6201d8b4e67196cc59e473427e1224dbbadbb22f9" },
+      { season: 1, episode: 3, url: "https://vod-limit.cuevanalatino.net/50088f52c10871f0bf8f4077c0c30102/576cb4e4dbb585606f06db05bdf14aa5-sd.m3u8?hdnts=exp=1766286219_acl=/50088f52c10871f0bf8f4077c0c30102/*_hmac=78b789ea954a7abb9b8db3cd0ea073cf745e18196ec916a69e5d02f9980eeb8f" },
+{ season: 1, episode: 4, url: "https://vod-limit.cuevanalatino.net/c0f6748ec68771f080754076d1d30102/26d768c43165218717a91a904498d6fd-sd.m3u8?hdnts=exp=1766288360_acl=/c0f6748ec68771f080754076d1d30102/*_hmac=7c1dfd22f7705715eee2def792dd747129a2207f846e1192dbf5987e5e4cf48c" },
+{ season: 1, episode: 5, url: "https://vod-limit-media.123flmsfree.com/707df6d9cc8271f0a3555114c1ca0102/7496734f392fd3e20a3b307af5565196-sd.m3u8?hdnts=exp=1766302870_acl=/707df6d9cc8271f0a3555114c1ca0102/*_hmac=521188405194f0311d876b0f341733eaca85d21967814f6dbacac8bd6e1039b7" },
+{ season: 1, episode: 6, url: "https://r-limit.flixlat.com/a00c7c0bd18571f0bff687c6371c0102/db29c6c7944d29a9730303f71cdd1039-sd.m3u8?hdnts=exp=1766310069_acl=/a00c7c0bd18571f0bff687c6371c0102/*_hmac=81fdbd8e2d65ad0c0c3ae0d78103299b44ca16ceed4e2e3371d2db54b1a7fa01" },
+{ season: 1, episode: 7, url: "https://vod-limit.cuevanalatino.net/f0e15c11d70a71f0bfbf4076d1d30102/1cffd7407aeb5f816cb5a8b055de2c83-sd.m3u8?hdnts=exp=1766310085_acl=/f0e15c11d70a71f0bfbf4076d1d30102/*_hmac=6347a4c4ed68b71216f2dbed70d02f7af6bf9fa81328bcfa63ef30dc2076b74c" },
+    ],
+    status: ['featured', 'Leg']
+  }, 
+{ // Nos seus sonhos
     tmdbId: "1117857",
     type: "movie",
     playbackUrl: "https://vod-limit-media.123flmsfree.com/60e86579c13371f0800d5114c1ca0102/b02d2ba88f6ab009beca46af2ab4a893-ld.m3u8?hdnts=exp=1766264117_acl=/60e86579c13371f0800d5114c1ca0102/*_hmac=6f755fd1bd108f434f0626c0772af153e25556bc2ecac28b42ab2b0f364dc0d3",
