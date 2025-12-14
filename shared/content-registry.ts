@@ -15,7 +15,49 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
-  { // Pluribus
+  { // Tá chovendo hambúrguer
+    tmdbId: "22794",
+    type: "movie",
+    playbackUrl: "https://r-limit.flixlat.com/4086a54d008171f0a0ab5014c1da0102/cdac4027f02a49f89c18a7b392416dae-b53756c2a4773f524d8c28eeae9030b7-sd.m3u8?hdnts=exp=1766308567_acl=/4086a54d008171f0a0ab5014c1da0102/*_hmac=03137618a3a9357626a14394d29488d38d213db16365364540d9c7bb05cdab06",
+    status: []
+  },
+{ // Tá chovendo hambúrguer 2
+    tmdbId: "109451",
+    type: "movie",
+    playbackUrl: "https://r-limit.flixlat.com/408ec764fd5271efb1a65014c1ca0102/59779cbf771a4480a7984abec1ce4a9b-f1befe41a1cd17e917a17e6b3b371dbc-ld.m3u8?hdnts=exp=1766307019_acl=/408ec764fd5271efb1a65014c1ca0102/*_hmac=b38c44a6d3963b4744413ffd69cd73d55a239e67796111662d87e82ca7c2a090",
+    status: []
+  },
+{ // Viva a vida como um festa
+    tmdbId: "354912",
+    type: "movie",
+    playbackUrl: "https://vod-limit-media.123flmsfree.com/c0ac069b40f071f08f085114c0db0102/45384569bc5b4236b38134fc2e7ec5b3-e80ad349f5d60930aab6d2a3061f4216-sd.m3u8?hdnts=exp=1766254875_acl=/c0ac069b40f071f08f085114c0db0102/*_hmac=c3d16f98fe8bb84508912cbcc92f0cc809d58a8179ae33069c07287f15a0e3ba",
+    status: []
+  },
+{ // Vivo
+    tmdbId: "449406",
+    type: "movie",
+    playbackUrl: "https://data-limit-c.solo-latino.com/c01f29aeef4471efbffe87c7371d0102/aa8e74e25db2402f93beb4b5825d5dfe-3923e6239fd4c660cb88efbaced88b15-ld.m3u8?hdnts=exp=1766318859_acl=/c01f29aeef4471efbffe87c7371d0102/*_hmac=2d19cbf58f01df5b4bf960bb8774256d2454426016393e6414b2cf10eafce793",
+    status: []
+  },
+{ // Dois irmãos
+    tmdbId: "508439",
+    type: "movie",
+    playbackUrl: "https://delivery-limit-c.123pelicula.com/609dce912e4a71f0b7185014c1ca0102/39570c3e218b4a2fa76304c2e328fde8-1b93ca241e289151cee25b93d8934fff-sd.m3u8?hdnts=exp=1766319205_acl=/609dce912e4a71f0b7185014c1ca0102/*_hmac=63189625d6ba7886b3a76d5b699f1a80c4b36a56115722543ae0b32a054e9cb3",
+    status: []
+  },
+{ // Ups altas aventuras
+    tmdbId: "14160",
+    type: "movie",
+    playbackUrl: "https://vod-limit-media.123flmsfree.com/b0f003d419ad71f0962e5014c1ca0102/0e1458b982c24fe6adf17704ab0000df-a3f39e3f1427de258f70118c33c2d71b-sd.m3u8?hdnts=exp=1766304580_acl=/b0f003d419ad71f0962e5014c1ca0102/*_hmac=f33b619027851a6b773c8e2b09a6a87fcf278c0f194283f7241081fe44609d3e",
+    status: []
+  },
+{ // Mario bros 1
+    tmdbId: "502356",
+    type: "movie",
+    playbackUrl: "https://data-limit-c.solo-latino.com/e03070d3191871f0b19697c6360c0102/d093ce2ad46b4d61b16f4ca43ea8d2af-63764c68c599de9fe0e5d099b720dafb-sd.m3u8?hdnts=exp=1766306261_acl=/e03070d3191871f0b19697c6360c0102/*_hmac=ec14ddb090b30e7b25c5a52687f17280c7e85ee8b3d066501b1b69a8fadf70f2",
+    status: []
+  },
+{ // Pluribus
     tmdbId: "225171",
     type: "series",
     episodes: [
