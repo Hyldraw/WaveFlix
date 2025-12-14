@@ -52,7 +52,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
   status: []
 },
 { // Now You See Me 3 (2025)
-  tmdbId: "1030002",
+  tmdbId: "425274",
   type: "movie",
   playbackUrl: "https://vod-limit-media.123flmsfree.com/80969a52c10771f09e895114c0db0102/0c7f6fdf4a65a6d2ca28a877329bc461-sd.m3u8?hdnts=exp=1766331805_acl=/80969a52c10771f09e895114c0db0102/*_hmac=4cb2aaf336944d5d60609c62aec956d3ab3a2df058d6cd1d7a9ff7a1ca3d884c",
   status: ['featured']
@@ -94,7 +94,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
   status: []
 },
 { // Jurassic World 4 (2025)
-  tmdbId: "1212073",
+  tmdbId: "1234821",
   type: "movie",
   playbackUrl: "https://vod-limit-media.123flmsfree.com/a06647c778e371f0944786c6360c0102/7729c7f22f38d6814285a32faa20459d-sd.m3u8?hdnts=exp=1766351892_acl=/a06647c778e371f0944786c6360c0102/*_hmac=c517adb8dd0ddc1b73153f7bd65afcd0c87b6bb2beb36050856e87d03632e41f",
   status: ['featured']
@@ -346,7 +346,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
   status: []
 },
 { // Superman (2025)
-  tmdbId: "1094556",
+  tmdbId: "1061474",
   type: "movie",
   playbackUrl: "https://stream-limit-vid.321moviesfree.com/10c01edb8d2471f0800b4177d1c00102/c156a285f3c3f50fa51e2a411472c2c0-sd.m3u8?hdnts=exp=1766323109_acl=/10c01edb8d2471f0800b4177d1c00102/*_hmac=437ae5ff5320b66f175c7ef153cae3734c32c6f30855f812e92136aefdd0ea43",
   status: []
