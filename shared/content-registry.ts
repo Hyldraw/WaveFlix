@@ -15,6 +15,204 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
+{ // John Wick (2014)
+  tmdbId: "245891",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/103b69adea7671ef802387c6371c0102/efa44600caa647a782b9881385ee4432-2a1f284d4464bd8d8de826e78cd1c56c-sd.m3u8?hdnts=exp=1766345025_acl=/103b69adea7671ef802387c6371c0102/*_hmac=7d4927d5493e95e4cec7b12468d82c333c281b11144340b2cf41372be41469c4",
+  status: []
+},
+{ // John Wick: Chapter 2 (2017)
+  tmdbId: "324552",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/c05f6858346271f0bf8b2680f9ea0102/6c9e0e5f165b47059ec3786844b9ad9e-f713b83613df9f759fe74bb555059a6f-ld.m3u8?hdnts=exp=1766301242_acl=/c05f6858346271f0bf8b2680f9ea0102/*_hmac=7a1f71e3e1817676c3c55b9d8f33a6fa140032559fa6ec7a85bfff389f897972",
+  status: []
+},
+{ // John Wick: Chapter 3 - Parabellum (2019)
+  tmdbId: "458156",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/50b743b2500b71f0800286c6360c0102/1852e54dbc5e4e6f9fadecb95ea25481-3574ecb5a1a01839ca5ddc5e10458ed0-ld.m3u8?hdnts=exp=1766344603_acl=/50b743b2500b71f0800286c6360c0102/*_hmac=5a9c56fd318a17ba865e83aeab7934b5f0bccbf0915217b07df4fb2d20935a76",
+  status: []
+},
+{ // John Wick: Chapter 4 (2023)
+  tmdbId: "603692",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/60f2a75c620e71f0bfca5114c1ca0102/9269d4ab98684565802cbad123ad8d9f-7a2096ba32f3756bf4933f8190ca50b3-sd.m3u8?hdnts=exp=1766342467_acl=/60f2a75c620e71f0bfca5114c1ca0102/*_hmac=4a137e422d3a348e9e4a4f882c44746457d6786fcec2cc09b968a8e2d4034ee5",
+  status: []
+},
+{ // Now You See Me (2013)
+  tmdbId: "75656",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/502110e1613f71f0bfd05014c1da0102/80f8ca93696042dc8e5e60f00ed7f419-afac948fa7d29f5ecdfcd53ddf4c5d0b-sd.m3u8?hdnts=exp=1766342203_acl=/502110e1613f71f0bfd05014c1da0102/*_hmac=494c438b812416cefba3f8aa3c33e5966ab746f12c9ef2e8627f0611d30143a1",
+  status: []
+},
+{ // Now You See Me 2 (2016)
+  tmdbId: "291805",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/20ca0ae1613f71f0bfa55114c0db0102/1a02ba4080b74762bebe112419678de6-9b39e672c999e45d43c53def6fa5d2d7-ld.m3u8?hdnts=exp=1766348632_acl=/20ca0ae1613f71f0bfa55114c0db0102/*_hmac=86475a99cf36bd38e09743cc72d5bcbc8dceeea3a086e7a209a8095ea0640d8b",
+  status: []
+},
+{ // Now You See Me 3 (2025)
+  tmdbId: "1030002",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/80969a52c10771f09e895114c0db0102/0c7f6fdf4a65a6d2ca28a877329bc461-sd.m3u8?hdnts=exp=1766331805_acl=/80969a52c10771f09e895114c0db0102/*_hmac=4cb2aaf336944d5d60609c62aec956d3ab3a2df058d6cd1d7a9ff7a1ca3d884c",
+  status: ['featured']
+},
+{ // Jurassic Park (1993)
+  tmdbId: "329",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/d0d9872a736671f0ae542680f9ea0102/bfc55ff8ff814bc68bc31b89778baf60-1fb1ab081d6dfb838b5e19e9052c256c-sd.m3u8?hdnts=exp=1766311369_acl=/d0d9872a736671f0ae542680f9ea0102/*_hmac=3e0036911bbe017f28b6b9a55a7f9a12093d56cce8c6b0c3ea0d61013bdc0ad5",
+  status: []
+},
+{ // The Lost World: Jurassic Park (1997)
+  tmdbId: "330",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/a04e4cbd526371f0988e5114c0db0102/a3719784025840be89c5da666660dede-a2bac32dc36154c46794c77f100a1cd1-ld.m3u8?hdnts=exp=1766344841_acl=/a04e4cbd526371f0988e5114c0db0102/*_hmac=b93f6e5c0a77cbc31d523d8d33fbd5dd67bab0ece2e776b3be258e142758ecbd",
+  status: []
+},
+{ // Jurassic Park III (2001)
+  tmdbId: "331",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/5091d9d2685871f0867a36a5e8aa0102/ac79d2914e8d4ca7acb8b82a6fbb3dd6-dbb3a787b2d0806cc001bdc251d45b61-sd.m3u8?hdnts=exp=1766351760_acl=/5091d9d2685871f0867a36a5e8aa0102/*_hmac=dc02a110c359fb005a9063e2bcd6bbe632cac372aed0f71e1721b31add0327f3",
+  status: []
+},
+{ // Jurassic World (2015)
+  tmdbId: "135397",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/a099fb56eb8271ef801986c6360c0102/e033b1bdb1264393aa0f6c54cb5d9437-5072d186cff9d552f3e0a7553c6f6b85-ld.m3u8?hdnts=exp=1766351806_acl=/a099fb56eb8271ef801986c6360c0102/*_hmac=41e4b0f718902ae9045ae2a3c9c9de1265fbd9e174769dc0f9455c4a1b9c0f2a",
+  status: []
+},
+{ // Jurassic World: Fallen Kingdom (2018)
+  tmdbId: "351286",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/b06e8b64eb8271efadaa97c6360c0102/97927b94c31a4a4baeee855136443811-8e9ee72e45f33fd2ccca75e737383dc5-ld.m3u8?hdnts=exp=1766351856_acl=/b06e8b64eb8271efadaa97c6360c0102/*_hmac=043d74bff5bfc6d4de124828064015e814fe523d122218e7b22328197e0a9467",
+  status: []
+},
+{ // Jurassic World: Dominion (2022)
+  tmdbId: "507086",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/e0cc81ec66c771f0bfec87c6371c0102/630566a165b543d0aae33e5e6cdce718-1f310e797edd5e9923eac92846cc1225-sd.m3u8?hdnts=exp=1766326921_acl=/e0cc81ec66c771f0bfec87c6371c0102/*_hmac=48f88f96d2faae69b1b1a198aea348260d57d7b5dc2214e7229e8582555574d5",
+  status: []
+},
+{ // Jurassic World 4 (2025)
+  tmdbId: "1212073",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/a06647c778e371f0944786c6360c0102/7729c7f22f38d6814285a32faa20459d-sd.m3u8?hdnts=exp=1766351892_acl=/a06647c778e371f0944786c6360c0102/*_hmac=c517adb8dd0ddc1b73153f7bd65afcd0c87b6bb2beb36050856e87d03632e41f",
+  status: ['featured']
+},
+{ // Harry Potter and the Sorcerer's Stone (2001)
+  tmdbId: "671",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/903afb4c41be71f0bff32680f9ea0102/3de29655f1be4a509db33126f17deef4-5684bbf5caa1ea6c3d36a87071929970-ld.m3u8?hdnts=exp=1766324278_acl=/903afb4c41be71f0bff32680f9ea0102/*_hmac=d290932fb80b64ee1da59bf6d40c0ea3c250fb9096dc89c27ec241542251eacd",
+  status: []
+},
+{ // Harry Potter and the Chamber of Secrets (2002)
+  tmdbId: "672",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/c0a4a9977ca971f0800436a5e8aa0102/7a2e42628aa3f422ff8ad0115e36e6db-ld.m3u8?hdnts=exp=1766323098_acl=/c0a4a9977ca971f0800436a5e8aa0102/*_hmac=0bc38e63b7a374c0e23e65a38facd7fd725e3e862b67bf6afa22916bf2938082",
+  status: []
+},
+{ // Harry Potter and the Prisoner of Azkaban (2004)
+  tmdbId: "673",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/3082b1fd475071f0bff95014c1ca0102/b67a809180764eb7be3afc73cc6b8645-617dadd082fa7dc192839a0a925fcc01-sd.m3u8?hdnts=exp=1766345610_acl=/3082b1fd475071f0bff95014c1ca0102/*_hmac=c5c47978bfae2d4360fdf9e13efbd7294168187fd88b0564b5b0bf9f86335741",
+  status: []
+},
+{ // Harry Potter and the Goblet of Fire (2005)
+  tmdbId: "674",
+  type: "movie",
+  playbackUrl: "https://stream-limit-vid.321moviesfree.com/b0f057b1475871f0906587c7371d0102/6e90a23cf0554fc7ae76de8b3c64e348-0de7450b177e3facd2e6a44b95aadcdc-sd.m3u8?hdnts=exp=1766313473_acl=/b0f057b1475871f0906587c7371d0102/*_hmac=a2c4b7fa88231ac198a952fd2680ebacc4a2064da4f74cc0905e4a2bacb372c0",
+  status: []
+},
+{ // Harry Potter and the Order of the Phoenix (2007)
+  tmdbId: "675",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/10797d40476171f0bfa087c7361c0102/d07b4d1addb142b5b41b82c0cd6a85ba-6dae30484d1e2e959b6a41d7e8fd4833-ld.m3u8?hdnts=exp=1766344698_acl=/10797d40476171f0bfa087c7361c0102/*_hmac=80c028c94513f46dad0481e267c6eb2c787e7086fc2fb828795c6b18f810cbc7",
+  status: []
+},
+{ // Harry Potter and the Half-Blood Prince (2009)
+  tmdbId: "767",
+  type: "movie",
+  playbackUrl: "https://vod-limit-media.123flmsfree.com/d0651d3b481971f0bfa487c7361c0102/58daa22a6a8e4b77979fd559b78225f3-3cd475a1c48d9cb8d50a2f28eb0ed881-sd.m3u8?hdnts=exp=1766340564_acl=/d0651d3b481971f0bfa487c7361c0102/*_hmac=8c1a32aba04f822d5d0d59b5e35ba8b3af1264d2ff9eb47146a066391525f194",
+  status: []
+},
+{ // Harry Potter and the Deathly Hallows: Part 1 (2010)
+  tmdbId: "12444",
+  type: "movie",
+  playbackUrl: "https://vod-limit-02.playspelis.com/1024420e476571f0bfa087c7361c0102/b33a21469d6a49acaf22ba542900bdc8-30cb5921eb4daac5473d3c13c4f283f7-ld.m3u8?hdnts=exp=1766328049_acl=/1024420e476571f0bfa087c7361c0102/*_hmac=efe1f0ffe86f7e4e5627b4b9860ea1f30caa0d3151fb0662c5844aae7fd035e3",
+  status: []
+},
+{ // Harry Potter and the Deathly Hallows: Part 2 (2011)
+  tmdbId: "12445",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/405615f22a4571f094794177d0d10102/9d8255b19fe5457b9bfa4a03b143bc8c-dd34ae1a0c8d99349176ff2008b4a991-sd.m3u8?hdnts=exp=1766346773_acl=/405615f22a4571f094794177d0d10102/*_hmac=5caf8f47def21671ad12075e5cc80ea7f965189a63129905a6c21320f8b27aaf",
+  status: []
+},
+{ // How to Train Your Dragon (2010)
+  tmdbId: "10191",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/603323f82b0671f0bff55014c1da0102/7a86c247785a41ab8ca9633f7b43d45c-3c94050e01bbbd36f330ee9510722895-ld.m3u8?hdnts=exp=1766344755_acl=/603323f82b0671f0bff55014c1da0102/*_hmac=d3d01540c9ee2df7a5614a3e92a87565f5588156bd4b684ccd6fb3dd560d1cdd",
+  status: []
+},
+{ // How to Train Your Dragon 2 (2014)
+  tmdbId: "82702",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/802732f82b0671f0bff55014c1da0102/cfc466df7ea742569234936687b898df-14055ceee4085fd5a277868e535837d8-ld.m3u8?hdnts=exp=1766348972_acl=/802732f82b0671f0bff55014c1da0102/*_hmac=1202298218c0c8886a650359a279b9e4e719f1e2632ab94c650dda60ab48d649",
+  status: []
+},
+{ // How to Train Your Dragon: The Hidden World (2019)
+  tmdbId: "166428",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/702e54f82b0671f0bff55014c1da0102/e69b24bcbb904fab829b2c837d6fd67c-cb4ca98cc9052dd9047c0818e6052525-sd.m3u8?hdnts=exp=1766339440_acl=/702e54f82b0671f0bff55014c1da0102/*_hmac=40930189de3d7bc48d8b77d940acdde742746784a0b8b2e3b21825a38da68d57",
+  status: []
+},
+{ // The Lord of the Rings: The Fellowship of the Ring (2001)
+  tmdbId: "120",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/f049478affc671ef86444177d1c00102/7b40f629387045c98095a84546a54889-8e8f463ef8fe92c9ba0d6c8692750ac9-sd.m3u8?hdnts=exp=1766344092_acl=/f049478affc671ef86444177d1c00102/*_hmac=323644bd9ab3cd76c9a310625b02644bb0fa56057502f64f11e92846b98b89a6",
+  status: []
+},
+{ // The Lord of the Rings: The Two Towers (2002)
+  tmdbId: "121",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/40f93cc8ffd971ef96652680f9ea0102/bfa9ec60a1eb44289c51d247edf8bb3d-5043c2d9ce6f573d79a79b2d0cc967da-ld.m3u8?hdnts=exp=1766340477_acl=/40f93cc8ffd971ef96652680f9ea0102/*_hmac=2b6ad989f21b9647cad38fca276c90bedd1057d10b7485ee45237901e39305e0",
+  status: []
+},
+{ // The Lord of the Rings: The Return of the King (2003)
+  tmdbId: "122",
+  type: "movie",
+  playbackUrl: "https://r-limit.flixlat.com/607552b0ffcc71efa25436a5e8aa0102/cddcfb58422549039a832e0047f682e0-f71adc3540d34cf6e0aa2a7ec9d66f1f-ld.m3u8?hdnts=exp=1766337253_acl=/607552b0ffcc71efa25436a5e8aa0102/*_hmac=90b6705e1719aac4570df359fb7c36b0f132ea5c8b30dccdfcd0563be1471ae7",
+  status: []
+},
+{ // Deadpool (2016)
+  tmdbId: "293660",
+  type: "movie",
+  playbackUrl: "https://vod-limit.cuevanalatino.net/60850308679271f0bfe85114c0db0102/93965095efc249f09540220c7476aaa2-f2039b455b83086948650aa50c1f5b77-ld.m3u8?hdnts=exp=1766346065_acl=/60850308679271f0bfe85114c0db0102/*_hmac=39e1f45f6d8e46ea0406a05145a0f3c02811c780597af48b50c8a336a774d68c",
+  status: []
+},
+{ // Deadpool 2 (2018)
+  tmdbId: "383498",
+  type: "movie",
+  playbackUrl: "https://data-limit-c.solo-latino.com/8038fdb14cd671f0bfd297c6360c0102/30ebc9c9846f4c2e9380e4fadd8ee9e7-6e7a6e60b6aeabf132f944ad8b56b8b2-ld.m3u8?hdnts=exp=1766352551_acl=/8038fdb14cd671f0bfd297c6360c0102/*_hmac=a8298785190a97060f46af6315b8164b80af48666771c4513a7e5c29b9b7c4d1",
+  status: []
+},
+{ // Venom (2018)
+  tmdbId: "335983",
+  type: "movie",
+  playbackUrl: "https://vod-limit-stream.dramasfree.com/b0f8006d1c3571f0b40f5014c1da0102/6ca2acbcf5124287833dbac55bb5d432-83476c1cf4908a516e6dc4ccdcb064ec-sd.m3u8?hdnts=exp=1766352699_acl=/b0f8006d1c3571f0b40f5014c1da0102/*_hmac=0796f8fb33b7bf8c805a8c743eccbfdfc44346fafccddbdfdd844ee5b2ec1faa",
+  status: []
+},
+{ // Venom: Let There Be Carnage (2021)
+  tmdbId: "580489",
+  type: "movie",
+  playbackUrl: "https://delivery-limit-c.123pelicula.com/806b75aee92471ef801086c6360c0102/7dabf6a7b2d04091b829c99374607b84-a880787aa6f275c77e1447167cb5dddf-ld.m3u8?hdnts=exp=1766344700_acl=/806b75aee92471ef801086c6360c0102/*_hmac=b2b3c1aed73ed25f74b9ac368d3b2538db1a0bbd61c199aad48cf4eb62909ad7",
+  status: []
+},
+{ // Venom: The Last Dance (2024)
+  tmdbId: "912649",
+  type: "movie",
+  playbackUrl: "https://delivery-limit-c.123pelicula.com/2046e299620f71f094314177d1c10102/102deee7ee0f44ea8b7f27fa027bdbb4-25d3ab4242b9450324e5dc933de59893-sd.m3u8?hdnts=exp=1766349168_acl=/2046e299620f71f094314177d1c10102/*_hmac=3ccc5973f522098db1aef3d3911087ab29cbda94fbf0d5b1961bd4d3ffa023c2",
+  status: []
+},
 { // Batman Begins (2005)
   tmdbId: "272",
   type: "movie",
