@@ -340,7 +340,7 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
   status: []
 },
 { // Joker: Folie à Deux (2024)
-  tmdbId: "1125311",
+  tmdbId: "889737",
   type: "movie",
   playbackUrl: "https://delivery-limit-c.123pelicula.com/108284fea87d71ef80115114c0db0102/606290e4df414537a62d419d3c0279e7-fb89cf666110b8ea29e95d0fd108e605-sd.m3u8?hdnts=exp=1766326906_acl=/108284fea87d71ef80115114c0db0102/*_hmac=d02929e2dd74e3f436a562146e8a6e2283b216364ed8e9b08698e76b29b5603e",
   status: []
