@@ -15,6 +15,21 @@ export interface RegisteredContent {
 }
 
 export const REGISTERED_CONTENT: RegisteredContent[] = [
+{ // It- Bem vindo a Derry 
+    tmdbId: "200875",
+    type: "series",
+    episodes: [
+      { season: 1, episode: 1, url: "https://vod-limit-res.cuevana.life/003e4b21b2fb71f0a43a97c6360c0102/875585138697848b3660f67bc597a720-sd.m3u8?hdnts=exp=1766375063_acl=/003e4b21b2fb71f0a43a97c6360c0102/*_hmac=61175cefec825fb08cd27961bdffa913505253d4e6fa0176a64bce53e3cd2288" },
+      { season: 1, episode: 2, url: "https://vod-limit-media.123flmsfree.com/8043b81ab8aa71f0b3bc4177d1c10102/45ab858f620eb2070858950a4eea181d-sd.m3u8?hdnts=exp=1766375690_acl=/8043b81ab8aa71f0b3bc4177d1c10102/*_hmac=08953742599d3ab1e09e71a1eaacc902ca1a92749bf3fd694d17f47f06e6ff30" },
+      { season: 1, episode: 3, url: "https://vod-limit-res.cuevana.life/50fc5d57be2571f0a5384177d1c10102/bf662935b2c3c66e9635ecbb090976e5-sd.m3u8?hdnts=exp=1766387656_acl=/50fc5d57be2571f0a5384177d1c10102/*_hmac=5abc90403decee727033bd2a0d9a469c43b44f067c8e4facd684ac8970f77748" },
+{ season: 1, episode: 4, url: "https://vod-limit-res.cuevana.life/50fc5d57be2571f0a5384177d1c10102/bf662935b2c3c66e9635ecbb090976e5-sd.m3u8?hdnts=exp=1766387656_acl=/50fc5d57be2571f0a5384177d1c10102/*_hmac=5abc90403decee727033bd2a0d9a469c43b44f067c8e4facd684ac8970f77748" },
+{ season: 1, episode: 5, url: "https://vod-limit-media.123flmsfree.com/600773e0c91071f0bfa93108f4940102/3ae2ff02200bfa814bcf5eb1dad9627a-sd.m3u8?hdnts=exp=1766386946_acl=/600773e0c91071f0bfa93108f4940102/*_hmac=7869bf9058e3b4a789c40fb22476d570655d8756989fa9238239752920c3cc5e" },
+{ season: 1, episode: 6, url: "https://vod-limit-media.123flmsfree.com/20c12dd0ceb471f0bffc87c7371d0102/307366fe081b1794cc39fe30cfb6d710-sd.m3u8?hdnts=exp=1766394614_acl=/20c12dd0ceb471f0bffc87c7371d0102/*_hmac=2891c3611825b7f49d0bedd7c829b3bce78ca88ba05c803c964c172ed4f7b98f" },
+{ season: 1, episode: 7, url: "https://vod-limit-media.123flmsfree.com/b00d8ba1d41271f0bfbb4076d1d30102/002e3e7531c65e68859359218079e19a-sd.m3u8?hdnts=exp=1766382991_acl=/b00d8ba1d41271f0bfbb4076d1d30102/*_hmac=6dfad4d2e9364f65c23c06476d99544eb17fee7119f93286491d328cd51ad0eb" },
+{ season: 1, episode: 8, url: "" },
+    ],
+    status: ['featured']
+  }, 
 { // John Wick (2014)
   tmdbId: "245891",
   type: "movie",
@@ -782,15 +797,57 @@ export const REGISTERED_CONTENT: RegisteredContent[] = [
     ],
     status: []
   }, 
-  { // Stranger Things
+  { // Stranger things
     tmdbId: "66732",
     type: "series",
     episodes: [
-      { season: 1, episode: 1, url: "https://example.com/stranger-things-s01e01.mp4" },
-      { season: 1, episode: 2, url: "https://example.com/stranger-things-s01e02.mp4" },
+      { season: 1, episode: 1, url: "https://media-limit-xr8a2.peliculaplay.com/20820cc6ee6971efb1a35114c0db0102/6665af3c033b4aefbdb0992b6dc25d05-d1d48d95f3debc256bb2542f9b44f2d4-sd.m3u8?hdnts=exp=1766366805_acl=/20820cc6ee6971efb1a35114c0db0102/*_hmac=2eb8afa9d367ca9934c5cbca0b22f75e24bf89d13a5f9243c4e8cefeeb6ac390" },
+      { season: 1, episode: 2, url: "https://r-limit.flixlat.com/b04fc045ee6a71efb1a35114c0db0102/0171534ae2b641558f7d1e65ee15e69c-4d0488448de5c896d67573e5c625d830-ld.m3u8?hdnts=exp=1766372827_acl=/b04fc045ee6a71efb1a35114c0db0102/*_hmac=d2496d59da18784173dcefed6686a15c670757ceea6cf52e85d4ffe9d8e84a5e" },
+      { season: 1, episode: 3, url: "https://vod-limit-02.playspelis.com/b031d56cee6a71efb1a35114c0db0102/d057ea7f143f498baf78e816e128c3e3-ead1ed5f87a80a9b387dceb3af0e5e6c-sd.m3u8?hdnts=exp=1766371510_acl=/b031d56cee6a71efb1a35114c0db0102/*_hmac=6677fe4e26b9cd0464165b53dab0b8d6a758ddc8823288442b2f7ead43bbdc0c" },
+{ season: 1, episode: 4, url: "https://vod-limit-02.playspelis.com/c0c2d8aeee6a71ef9bc487c7361c0102/04f4668361dd4bc7aee545b7e756076a-36974b1c903e5e87878034260c5c4caa-sd.m3u8?hdnts=exp=1766377805_acl=/c0c2d8aeee6a71ef9bc487c7361c0102/*_hmac=b57de27fc749908b4c29dc941ba28ff4f8d96fc34e0bfcde7d29c96daf7c5d85" },
+{ season: 1, episode: 5, url: "https://vod-limit-media.123flmsfree.com/5061ae3bee6b71efaf495114c1ca0102/3814473fc1804b0f9402ec11431c2671-163d441d59b4b525d53c232f02e7ab2e-sd.m3u8?hdnts=exp=1766374535_acl=/5061ae3bee6b71efaf495114c1ca0102/*_hmac=3214f77f32de990905b3f10b80e33c1a2d06940f4882bbb2238e799a53923f84" },
+{ season: 1, episode: 6, url: "https://vod-limit-02.playspelis.com/f00d674eee6c71efb1a35114c0db0102/adca271b7f134abe83be4cd4e247642c-81d650c3bcf0d964f201c1918712c170-sd.m3u8?hdnts=exp=1766387454_acl=/f00d674eee6c71efb1a35114c0db0102/*_hmac=147cd29f68d8898118c4ccf49b289a245151dc3bb31a951e2168b09d7f64f4ac" },
+{ season: 1, episode: 7, url: "https://vod-limit-02.playspelis.com/40df0042ee8171ef80032680f9ea0102/ef7c6082ecdd4b41bdb2a7bc1366b69e-f62f1a97051bcbbd587f1ed99568735f-sd.m3u8?hdnts=exp=1766387534_acl=/40df0042ee8171ef80032680f9ea0102/*_hmac=a738486d84d7b53fe36d4d0a00811a7369d27c7dd4bbaaea5da50bfb6884ff83" },
+{ season: 1, episode: 8, url: "https://vod-limit-02.playspelis.com/80cce8faee8071ef98074177d1c10102/2d76e87f0e7b440ea91c1847b8a40517-a6311e89d5945044873e6db5897d08ac-sd.m3u8?hdnts=exp=1766317395_acl=/80cce8faee8071ef98074177d1c10102/*_hmac=535dc72bb7106345e728524a46d333b431ad6d9b7c7be9523d1a294c6b78107d" },
+{ season: 2, episode: 1, url: "https://vod-limit-02.playspelis.com/b00f11d3ee8071ef803e5014c1da0102/73989a4ff3114a6bb9193a6de76c1932-1b86356d3802bc6780858231e8d2c936-sd.m3u8?hdnts=exp=1766382704_acl=/b00f11d3ee8071ef803e5014c1da0102/*_hmac=5e8214a85214ae99ff4acf8b4ce1f23845c151e05617de25642b001a29059859" },
+{ season: 2, episode: 2, url: "https://vod-limit-media.123flmsfree.com/30f641f6ee7f71ef9e815014c1ca0102/705f60debfbd413fa52d66114ffcaa93-ceb421a12f89fcaba3aa111e39091876-sd.m3u8?hdnts=exp=1766378485_acl=/30f641f6ee7f71ef9e815014c1ca0102/*_hmac=eb7fc9e82a9119bfc8ea18d17926c3096d853ec029ee8e7e999ea4eca9bd93fe" },
+{ season: 2, episode: 3, url: "https://vod-limit-02.playspelis.com/f01b60bbee7f71ef80032680f9ea0102/463f0fec21594c44ac8eb88615aa3fcf-f9ebd5a8a1d8265cd27c20289f54835d-sd.m3u8?hdnts=exp=1766388017_acl=/f01b60bbee7f71ef80032680f9ea0102/*_hmac=851ff73e9d72fd1e5416c72b72f4c74e898f324432bd66f28e067aad83760b1f" },
+{ season: 2, episode: 4, url: "https://media-limit-xr8a2.peliculaplay.com/4038c981ee7f71ef9e815014c1ca0102/995fabc4d4bc47378a8a63d66cc20f8a-465786e9d9d84d47ce6cc15240690daf-sd.m3u8?hdnts=exp=1766372983_acl=/4038c981ee7f71ef9e815014c1ca0102/*_hmac=c786076be027ded2c84e606d2547afc57729cd01d87adcf10529c3c6aec2c2cf" },
+{ season: 2, episode: 5, url: "https://vod-limit-02.playspelis.com/a0337868ee7f71ef80032680f9ea0102/6d4c77aa21e84140a99efd8408b4c31f-ce6e3bd7fd878bdf478e6a73dab93b42-sd.m3u8?hdnts=exp=1766395687_acl=/a0337868ee7f71ef80032680f9ea0102/*_hmac=90ffc3d9cf194186fb4d73f821a3ef5f30e56e63d3a47413763799756edcc670" },
+{ season: 2, episode: 6, url: "https://vod-limit-02.playspelis.com/a0fe9cceee7e71ef802e87c6371c0102/0c5df9db29db4f3f9bd1e63858c5828e-f48e1150692eda208ddb173a54c75f52-sd.m3u8?hdnts=exp=1766388069_acl=/a0fe9cceee7e71ef802e87c6371c0102/*_hmac=daabfc76e73f9585fd68f56de214d34c67eeb0c1bf5502465c0ed0d71cd24f3b" },
+{ season: 2, episode: 7, url: "https://vod-limit-02.playspelis.com/606e24b8ee7e71efbfe64177d0d10102/056ea3bf9ea74e5dbbbb1b80de3acf05-76640cc3ea74b8065c786f13831fc572-sd.m3u8?hdnts=exp=1766385364_acl=/606e24b8ee7e71efbfe64177d0d10102/*_hmac=1beefb217a5ae2c8d5467eceb1353cf51762c3a29400e4208e92595fc694297a" },
+{ season: 2, episode: 8, url: "https://delivery-limit-c.123pelicula.com/b01d4890ee7e71ef803e5014c1da0102/151eb4a76857453dbdd94e17945613f0-3d5ead03bacc97db2248c7fe83a5fb0b-sd.m3u8?hdnts=exp=1766380298_acl=/b01d4890ee7e71ef803e5014c1da0102/*_hmac=38845b7b7e035ad2f21ccd6242251c785b9f66eba2c77afb5cc8abd3a6f2ed5a" },
+{ season: 2, episode: 9, url: "https://vod-limit-02.playspelis.com/10c51336ee7e71ef802e87c6371c0102/e38f08dad87448d1865206a962e6310a-34bcb61178c422cbe3b5438ed2fc7951-sd.m3u8?hdnts=exp=1766395765_acl=/10c51336ee7e71ef802e87c6371c0102/*_hmac=a70ca898c5a82288f760e7463988c4ae32eda956aa66a46942ab0a9b63101c12" },
+{ season: 3, episode: 1, url: "https://vod-limit-02.playspelis.com/603d3e80ee7d71ef98074177d1c10102/e5412b7b9fb44c9aafff0c8fc12da021-99fea48e4f0be71075ca2fb1f380b48d-sd.m3u8?hdnts=exp=1766395783_acl=/603d3e80ee7d71ef98074177d1c10102/*_hmac=8b5aff893e8b335d348c8593e65dd18d4d8573e4ebfe59f93e2fdf1959e2de90" },
+{ season: 3, episode: 2, url: "https://vod-limit-02.playspelis.com/40f43c45ee7d71ef98074177d1c10102/9a7adfdbc38e466086c86b39103f509b-5467fa6551d241499a36cee626a93226-sd.m3u8?hdnts=exp=1766367632_acl=/40f43c45ee7d71ef98074177d1c10102/*_hmac=a6631ffb22846f8cf534a0755cfebd1bfa9638dd2d28f00a34acf18cbb022047" },
+{ season: 3, episode: 3, url: "https://vod-limit-02.playspelis.com/90c987d0ee7c71ef9e815014c1ca0102/d6868faa96b14fe18f56aa82aa4ca6ac-6fd5a632193e98cadef0d31100ca357f-sd.m3u8?hdnts=exp=1766344032_acl=/90c987d0ee7c71ef9e815014c1ca0102/*_hmac=01ec33cdecf1eaa4912f879e3ed1ab91b33d04af8243c049377a6b2da8a995cb" },
+{ season: 3, episode: 4, url: "https://vod-limit-media.123flmsfree.com/f00f63b8ee7c71ef80032680f9ea0102/52d3d285927b4b89881f062b194b851c-aebcc55ec991fb069cd4704387858280-sd.m3u8?hdnts=exp=1766368887_acl=/f00f63b8ee7c71ef80032680f9ea0102/*_hmac=918565317e61ccc30d1f6d3c31dace34a78132fd4f36f824652993ac679d6d29" },
+{ season: 3, episode: 5, url: "https://vod-limit-02.playspelis.com/70f3b7a1ee7b71ef9bc687c7361c0102/72cf7f0db7b448d98d35ffd731b7e2ec-b5c9d25a9620b56cc5c418bec6438fc9-sd.m3u8?hdnts=exp=1766395841_acl=/70f3b7a1ee7b71ef9bc687c7361c0102/*_hmac=b8b38fe76da8600716fe44956e8783f12aca761cfba94a5d122f1b8ad0acd795" },
+{ season: 3, episode: 6, url: "https://vod-limit-02.playspelis.com/70d35e11ee7b71ef802e87c6371c0102/1d6f40faab2c4e778bb29024b6f02425-9b68b2dad6df54a4de1113f0fcb9ec67-sd.m3u8?hdnts=exp=1766381573_acl=/70d35e11ee7b71ef802e87c6371c0102/*_hmac=c0fda86d0d1bec1d3c8f908d86a6387216e5a9b6cb3e597558e7805902013704" },
+{ season: 3, episode: 7, url: "https://vod-limit-02.playspelis.com/d07ae0ecee7a71ef9e815014c1ca0102/0f27f218129a453b9c21d8926b017a02-dad4952a6ca9605aa856bdb56b0957b5-sd.m3u8?hdnts=exp=1766387879_acl=/d07ae0ecee7a71ef9e815014c1ca0102/*_hmac=e9660414e63bbcef624c131a5b0e04b53e4538437e36ecc604469c975a15adb8" },
+{ season: 3, episode: 8, url: "https://vod-limit-02.playspelis.com/10585ec5ee7a71efb1a35114c0db0102/1feb89936f394a43901ecd1dc53b1ce5-cbf972fd0380f602b0064c700b8846b4-ld.m3u8?hdnts=exp=1766377056_acl=/10585ec5ee7a71efb1a35114c0db0102/*_hmac=3a97c45749e821bd33b013e1758e7c1eea6f73598f240f41d5aa62f63356600f" },
+{ season: 4, episode: 1, url: "https://vod-limit-02.playspelis.com/804393f4ee7971ef9e815014c1ca0102/2129edb6fed0488aa5d1fc7c904e47f6-7008be797121a203075b513dcbe12456-sd.m3u8?hdnts=exp=1766387898_acl=/804393f4ee7971ef9e815014c1ca0102/*_hmac=b12ae662d6465f80010af7bebf3b94abaaf9f9366757ca78e863b428c304acd3" },
+{ season: 4, episode: 2, url: "https://vod-limit-02.playspelis.com/305362e4ee7871ef955b87c7371d0102/92263f2383c1490e8dc0f7601da0734e-6612312e145762a27675d92cdb80776f-sd.m3u8?hdnts=exp=1766348268_acl=/305362e4ee7871ef955b87c7371d0102/*_hmac=d03500bc8db8e7d4605f2acc2702c8131cf043da54495fdab5602523f2370a6a" },
+{ season: 4, episode: 3, url: "https://c4-limit.cuevana4br.com/d0bb5fa7ee7871ef802686c6360c0102/6e8fc622d33f4425956181e9080dab77-cd6800a14f1228fc93cc4ffb2a87e58d-sd.m3u8?hdnts=exp=1766374055_acl=/d0bb5fa7ee7871ef802686c6360c0102/*_hmac=6de4e16ebe5722a0c79d5556ed1bae007e0f5ef15a916e09e47b9c089d3fd14f" },
+{ season: 4, episode: 4, url: "https://vod-limit-02.playspelis.com/20edcba0ee7871efb1a35114c0db0102/7c5750bb3df342949ac3b8e5e793923b-639fa95d044494f1a085502949648be5-sd.m3u8?hdnts=exp=1766379571_acl=/20edcba0ee7871efb1a35114c0db0102/*_hmac=42b4bb21d3dcc8bd4ffadf4df4fa04a52c0d6246a46f6a641eb6f269c5776b1d" },
+{ season: 4, episode: 5, url: "https://vod-limit-media.123flmsfree.com/10c1b9ffee7671ef9e815014c1ca0102/7c16cf36afdd48fc9f5e8ef3a9c384bd-842a3657f6b77c94006887b4375f7779-ld.m3u8?hdnts=exp=1766369344_acl=/10c1b9ffee7671ef9e815014c1ca0102/*_hmac=efafd802591f8202150f331169820c71fbeb3f0b2aa28fb93d5440b9a6905ca3" },
+{ season: 4, episode: 6, url: "https://vod-limit-02.playspelis.com/e0aff344ee7571efbfe64177d0d10102/6e2c41bc99de4b0b8b6c6f284f6dcd25-229d4301515403472254344a1329fa07-sd.m3u8?hdnts=exp=1766395974_acl=/e0aff344ee7571efbfe64177d0d10102/*_hmac=996a9e04c6249aeeaf2f0731ab9fed297d2331f582c887e1b6cc3e405a5211cd" },
+{ season: 4, episode: 7, url: "https://vod-limit-02.playspelis.com/9037bac4ee7471efbf984177d1c00102/d4c350c6dc1c4c01a924131696cf5fd7-ca544e3a6b2c4a70cc5771419154d130-sd.m3u8?hdnts=exp=1766378184_acl=/9037bac4ee7471efbf984177d1c00102/*_hmac=3655ab3fc1ebdadbf73288b444a3c1ddf378ee2d317c6d828d9e52fb3e48f8fe" },
+{ season: 4, episode: 8, url: "https://vod-limit-media.123flmsfree.com/10cedd1cee7471ef803e5014c1da0102/2e2d4997dd9a40f698b334c7f9330c53-437c5b00d53fa9ebd1e48500af03333c-ld.m3u8?hdnts=exp=1766364957_acl=/10cedd1cee7471ef803e5014c1da0102/*_hmac=54a80d78d9218c6d9674d7a4a60802eb0a8b4ffb97e0fcb6f9b172f66a8dfa3c" },
+{ season: 4, episode: 9, url: "https://vod-limit-02.playspelis.com/e0d2050cee7471ef9bc587c7361c0102/e685511897ac49a099d4822bce0e9828-4525944b9b532be38a081e976990e547-sd.m3u8?hdnts=exp=1766369876_acl=/e0d2050cee7471ef9bc587c7361c0102/*_hmac=ba0fda9a8c056fb140200a54772d6f2b301560f9766c955a05322ba90300107a" },
+{ season: 5, episode: 1, url: "https://vod-limit-02.playspelis.com/20cb5657cb3071f0bf933108f4850102/507f520f6dcfbced13be5f9beaea2eb9-sd.m3u8?hdnts=exp=1766362584_acl=/20cb5657cb3071f0bf933108f4850102/*_hmac=0cd7dcb7108611014a7fcd33f3f778a7ebf6aa54cfb25a27b78202fc4f979270" },
+{ season: 5, episode: 2, url: "https://vod-limit-02.playspelis.com/701eaa75cb2f71f0bfbc4077c0c20102/0db6993eafa393645016d55eb8395214-sd.m3u8?hdnts=exp=1766373099_acl=/701eaa75cb2f71f0bfbc4077c0c20102/*_hmac=95c3d1e00d8df095c3c0a33ea313ef54dbd7560ec0130863ee8f6236977ceff0" },
+{ season: 5, episode: 3, url: "https://vod-limit-02.playspelis.com/20b11525cb3171f0b0784177d1c00102/02cdaa2f3df60b343581de546d5b7e23-sd.m3u8?hdnts=exp=1766392973_acl=/20b11525cb3171f0b0784177d1c00102/*_hmac=50b2e7f5ddc6662c942bbf41801f263f13be9481d669f93466ee95b095da6c39" },
+{ season: 5, episode: 4, url: "https://stream-limit-vid.321moviesfree.com/60fe6f63cb3371f0a97f4076d1d30102/eb86b644e4117a07f297e87444f93663-sd.m3u8?hdnts=exp=1766380046_acl=/60fe6f63cb3371f0a97f4076d1d30102/*_hmac=d013a4daf714e96a2dc691cc044aa36227659d3b2912c2e12b59856a92421d44" },
+{ season: 5, episode: 5, url: "" },
+{ season: 5, episode: 6, url: "" },
+{ season: 5, episode: 7, url: "" },
+{ season: 5, episode: 8, url: "" },
+
+
     ],
-    status: ['featured']
-  },
+    status: ['featured',]
+  }, 
   { // The Last of Us
     tmdbId: "100088",
     type: "series",
