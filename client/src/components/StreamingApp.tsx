@@ -36,7 +36,10 @@ import {
   Award,
   Clapperboard,
   Crown,
-  MonitorPlay
+  MonitorPlay,
+  Lock,
+  CalendarDays,
+  VideoOff
 } from "lucide-react";
 import { useLockPortrait } from "@/hooks/useScreenOrientation";
 import { Button } from '@/components/ui/button';
@@ -1383,94 +1386,166 @@ export default function StreamingApp() {
                 </div>
               </div>
 
-              {/* Lista de Episódios - Layout Mobile Otimizado */}
+              {/* Lista de Episódios - Premium Layout */}
               <div className="px-4 pb-8">
                 <div className="max-w-4xl mx-auto">
                   {seasonData && seasonData.episodes && (
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {seasonData.episodes.map((episode: any) => {
                         const progress = getContentProgress(selectedContent.id);
                         const isWatching = progress?.seasonNumber === selectedSeason && progress?.episodeNumber === episode.episode_number;
                         const isExpanded = expandedEpisodeSynopsis === episode.episode_number;
+                        const isNew = episode.air_date && new Date(episode.air_date) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                        const isReleased = episode.air_date ? new Date(episode.air_date) <= new Date() : true; // If no air_date, assume released
+                        const isFutureEpisode = episode.air_date && new Date(episode.air_date) > new Date(); // Only future if has date and date is in future
+                        const episodeLinks = selectedContent.episodeLinks || [];
+                        const hasEpisodeLink = episodeLinks.some(link => 
+                          Number(link.season) === selectedSeason && 
+                          Number(link.episode) === episode.episode_number && 
+                          link.url && link.url.trim() !== ''
+                        );
+                        const hasNoLink = !hasEpisodeLink;
+                        const isLocked = isFutureEpisode || hasNoLink;
+                        const showCalendarIcon = isFutureEpisode && !hasNoLink;
+                        const showVideoOffIcon = hasNoLink && !isFutureEpisode;
                         
                         return (
                           <div
                             key={episode.episode_number}
-                            className={`bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden transition-all border ${
+                            className={`group relative overflow-hidden rounded-2xl transition-all duration-300 ${
                               isWatching 
-                                ? 'border-blue-500/50 ring-1 ring-blue-500/30' 
-                                : 'border-gray-800/50 hover:border-gray-700'
+                                ? 'bg-gradient-to-r from-blue-600/30 via-blue-500/20 to-transparent border-2 border-blue-500/60 shadow-lg shadow-blue-500/30'
+                                : isLocked
+                                ? 'bg-gradient-to-r from-gray-700/50 via-gray-600/30 to-gray-700/30 border border-gray-700/40 shadow-lg grayscale opacity-60'
+                                : 'bg-gradient-to-r from-gray-900/80 via-gray-800/40 to-gray-900/30 border border-gray-800/60 hover:border-blue-500/40 shadow-lg hover:shadow-xl hover:shadow-blue-500/20'
                             }`}
                           >
-                            {/* Card Principal - Layout adaptativo para mobile */}
+                            {/* Animated background glow */}
+                            <div className={`absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-blue-500/0 ${!isLocked && 'group-hover:from-blue-500/10 group-hover:via-blue-500/5 group-hover:to-transparent'} transition-all duration-500 pointer-events-none`} />
+                            
+                            {/* Card Principal - Premium Layout */}
                             <div 
-                              onClick={() => playEpisode(selectedContent.id, selectedSeason, episode.episode_number, false, episode.name)}
-                              className="flex gap-2 sm:gap-3 p-2 sm:p-3 cursor-pointer group"
+                              onClick={() => !isLocked && playEpisode(selectedContent.id, selectedSeason, episode.episode_number, false, episode.name)}
+                              className={`relative flex gap-3 sm:gap-4 p-3 sm:p-4 ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                             >
-                              {/* Miniatura do Episódio - Muito compacta em telas pequenas */}
-                              <div className="relative w-20 sm:w-28 md:w-36 flex-shrink-0">
-                                <div className="aspect-video rounded-lg overflow-hidden bg-gray-800">
+                              {/* Miniatura do Episódio - Premium Style */}
+                              <div className="relative w-24 sm:w-32 md:w-40 flex-shrink-0">
+                                <div className={`aspect-video rounded-xl overflow-hidden bg-gray-800 border transition-all duration-300 ${isLocked ? 'border-gray-700/30' : 'border-gray-700/50 group-hover:border-blue-500/50'}`}>
                                   <img
                                     src={episode.still_path 
                                       ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
                                       : selectedContent.backdrop || selectedContent.poster
                                     }
                                     alt={episode.name}
-                                    className="w-full h-full object-cover"
+                                    className={`w-full h-full object-cover transition-transform duration-300 ${isLocked ? 'grayscale' : 'group-hover:scale-105'}`}
                                   />
+                                  {/* Gradient overlay */}
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 </div>
-                                {/* Play Overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
-                                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-full">
-                                    <Play size={20} className="text-white" fill="currentColor" />
+                                
+                                {/* Play Button - Premium */}
+                                {!isLocked && (
+                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                    <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-full shadow-lg shadow-blue-500/50 group-hover:scale-110 transition-transform duration-300">
+                                      <Play size={24} className="text-white" fill="currentColor" />
+                                    </div>
                                   </div>
-                                </div>
-                                {/* Badge de Assistindo */}
+                                )}
+                                
+                                {/* Video Off Icon - Episódio sem Link */}
+                                {showVideoOffIcon && (
+                                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                    <div className="text-white/70">
+                                      <VideoOff size={28} />
+                                    </div>
+                                  </div>
+                                )}
+                                
+                                {/* Calendar Icon - Episódio Futuro */}
+                                {showCalendarIcon && (
+                                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                    <div className="text-white/70">
+                                      <CalendarDays size={28} />
+                                    </div>
+                                  </div>
+                                )}
+                                
+                                {/* Badge de Assistindo - Premium */}
                                 {isWatching && (
-                                  <div className="absolute top-1 left-1 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">
+                                  <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-lg shadow-blue-500/50 flex items-center gap-1">
+                                    <Check size={12} />
                                     ASSISTINDO
+                                  </div>
+                                )}
+                                
+                                {/* Badge de Novo - Premium */}
+                                {isNew && !isWatching && (
+                                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg shadow-orange-500/50">
+                                    NOVO
                                   </div>
                                 )}
                               </div>
                               
-                              {/* Info do Episódio */}
-                              <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                <div className="flex items-center gap-2 mb-0.5">
-                                  <span className="text-blue-400 font-bold text-sm">EP {episode.episode_number}</span>
-                                  {episode.runtime && (
-                                    <span className="text-gray-500 text-xs flex items-center gap-1">
-                                      <Clock size={10} />
-                                      {episode.runtime}min
+                              {/* Info do Episódio - Premium */}
+                              <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                {/* Top Row */}
+                                <div>
+                                  <div className="flex items-center gap-2 mb-1.5">
+                                    <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent font-bold text-sm">
+                                      EP {episode.episode_number}
                                     </span>
-                                  )}
+                                    {episode.vote_average && (
+                                      <div className="flex items-center gap-1 bg-yellow-500/20 px-2 py-0.5 rounded-full">
+                                        <span className="text-yellow-400 text-xs font-semibold">{episode.vote_average.toFixed(1)}</span>
+                                        <span className="text-yellow-400 text-xs">★</span>
+                                      </div>
+                                    )}
+                                    {episode.runtime && (
+                                      <span className="text-gray-400 text-xs flex items-center gap-1 ml-auto">
+                                        <Clock size={11} />
+                                        {episode.runtime}min
+                                      </span>
+                                    )}
+                                  </div>
+                                  <h3 className="text-white font-semibold text-sm md:text-base mb-1.5 line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
+                                    {episode.name}
+                                  </h3>
                                 </div>
-                                <h3 className="text-white font-semibold text-sm md:text-base mb-1 line-clamp-2">{episode.name}</h3>
+                                
+                                {/* Bottom Row */}
                                 {episode.air_date && (
-                                  <span className="text-gray-500 text-xs">
+                                  <span className={`text-xs flex items-center gap-1 ${isLocked ? 'text-gray-600' : 'text-gray-500'}`}>
                                     {new Date(episode.air_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' })}
                                   </span>
                                 )}
                               </div>
                             </div>
 
-                            {/* Sinopse - Expandível */}
+                            {/* Separator */}
                             {episode.overview && (
-                              <div className="px-3 pb-3">
+                              <div className="h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent" />
+                            )}
+
+                            {/* Sinopse - Premium Expandível */}
+                            {episode.overview && (
+                              <div className="px-4 pb-3">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     setExpandedEpisodeSynopsis(isExpanded ? null : episode.episode_number);
                                   }}
-                                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-medium transition-colors w-full"
+                                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-medium transition-all duration-300 w-full group/btn"
                                 >
-                                  <Info size={14} />
+                                  <Info size={14} className="group-hover/btn:rotate-12 transition-transform duration-300" />
                                   <span>Ver sinopse</span>
-                                  {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                  <div className="ml-auto">
+                                    {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                  </div>
                                 </button>
                                 
-                                {/* Sinopse Expandida */}
-                                <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 mt-2' : 'max-h-0'}`}>
-                                  <p className="text-gray-400 text-sm leading-relaxed bg-gray-800/50 p-3 rounded-lg">
+                                {/* Sinopse Expandida - Premium */}
+                                <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 mt-3' : 'max-h-0'}`}>
+                                  <p className="text-gray-300 text-sm leading-relaxed bg-gradient-to-br from-blue-500/10 to-cyan-500/5 p-3 rounded-lg border border-blue-500/20 backdrop-blur-sm">
                                     {episode.overview}
                                   </p>
                                 </div>
@@ -1580,14 +1655,41 @@ export default function StreamingApp() {
         </div>
       )}
 
-      {/* Progress Bar */}
+      {/* Progress Bar - Modern Design */}
       {activeCategory === "home" && featuredContent.length > 1 && (
-        <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-2">
-          <div className="w-full bg-white/20 h-1 rounded-full overflow-hidden backdrop-blur-sm max-w-md mx-auto">
-            <div
-              className="h-full bg-gradient-to-r from-blue-500 to-blue-500 rounded-full transition-all duration-100 ease-linear progress-glow"
-              style={{ width: `${progress}%` }}
-            />
+        <div className="px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+          <div className="max-w-md mx-auto">
+            {/* Background track */}
+            <div className="relative h-1.5 bg-gradient-to-r from-gray-800/40 to-gray-700/40 rounded-full overflow-hidden backdrop-blur-sm border border-white/5 shadow-lg">
+              {/* Glowing effect background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent" />
+              
+              {/* Progress bar with gradient and glow */}
+              <div
+                className="h-full bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 rounded-full transition-all duration-100 ease-linear shadow-lg relative"
+                style={{ 
+                  width: `${progress}%`,
+                  boxShadow: `0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(34, 211, 238, 0.3)`
+                }}
+              >
+                {/* Shine effect on progress */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 rounded-full animate-pulse" />
+              </div>
+            </div>
+            
+            {/* Indicator dots */}
+            <div className="flex justify-center items-center gap-1.5 mt-4">
+              {featuredContent.map((_, index) => (
+                <div
+                  key={index}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === featuredIndex
+                      ? 'w-2.5 h-2.5 bg-gradient-to-r from-blue-400 to-cyan-400 shadow-lg shadow-blue-500/50'
+                      : 'w-1.5 h-1.5 bg-gray-600/60 hover:bg-gray-500/80'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -2234,14 +2336,19 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
         </div>
       </div>
 
-      {/* Legendado badge - shows if status contains 'Leg' */}
-      {(item as ExtendedContent).status?.includes('Leg') && (
-        <div className="absolute top-3 left-3">
-          <span className="bg-yellow-600 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-testid={`text-leg-${item.id}`}>
-            LEG
+      {/* Status badges - shows 'Legendado' if status contains 'Leg', 'Cam' if contains 'Cam' */}
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 flex flex-col gap-2 items-center">
+        {(item as ExtendedContent).status?.includes('Leg') && (
+          <span className="bg-orange-600 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-testid={`text-leg-${item.id}`}>
+            Legendado
           </span>
-        </div>
-      )}
+        )}
+        {(item as ExtendedContent).status?.includes('Cam') && (
+          <span className="bg-blue-900 text-white text-xs px-4 py-1.5 rounded-full font-bold whitespace-nowrap" data-testid={`text-cam-${item.id}`}>
+            Gravação de Cinema
+          </span>
+        )}
+      </div>
     </div>
 
     {/* Content info */}
