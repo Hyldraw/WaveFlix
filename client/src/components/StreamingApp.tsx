@@ -52,6 +52,7 @@ interface ExtendedContent extends Content {
   playbackUrl?: string;
   episodeLinks?: Array<{ season: number; episode: number; url: string }>;
   status?: string[];
+  logo?: string;
 }
 
 // Configuração da API TMDB
@@ -154,6 +155,24 @@ async function getGenres(type: 'movie' | 'tv'): Promise<Genre[]> {
   } catch (error) {
     console.error("Error fetching genres:", error);
     return [];
+  }
+}
+
+// Função para buscar o logo do TMDB
+async function fetchLogo(tmdbId: number, type: 'movie' | 'tv'): Promise<string | null> {
+  try {
+    const endpoint = type === 'movie' ? `/movie/${tmdbId}/images` : `/tv/${tmdbId}/images`;
+    const response = await fetchTMDB(endpoint);
+    
+    if (response.logos && response.logos.length > 0) {
+      // Priorizar logos com iso_639_1 = null (universal) ou PT-BR
+      let selectedLogo = response.logos.find((logo: any) => logo.iso_639_1 === null) || response.logos[0];
+      return `${TMDB_IMAGE_BASE}/w500${selectedLogo.file_path}`;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error fetching logo:", error);
+    return null;
   }
 }
 
@@ -716,7 +735,11 @@ export default function StreamingApp() {
   const [seasonDropdownOpen, setSeasonDropdownOpen] = useState(false);
 
   const openDetails = async (content: Content) => {
-    setSelectedContent(content);
+    // Buscar logo do TMDB
+    const logo = await fetchLogo(parseInt(content.id), content.type === 'series' ? 'tv' : 'movie');
+    const contentWithLogo = { ...content, logo } as ExtendedContent;
+    
+    setSelectedContent(contentWithLogo);
     setCurrentView("details");
     setSelectedSeason(1);
     setSelectedEpisode(1);
@@ -768,7 +791,11 @@ export default function StreamingApp() {
 
   // Abrir modal de episódios para série (inteligente - abre na temporada/episódio onde parou)
   const openSeriesEpisodes = async (content: Content, savedSeason?: number) => {
-    setSelectedContent(content);
+    // Buscar logo se não existir
+    const logo = (content as any).logo || await fetchLogo(parseInt(content.id), 'tv');
+    const contentWithLogo = { ...content, logo } as ExtendedContent;
+    
+    setSelectedContent(contentWithLogo);
     setExpandedEpisodeSynopsis(null);
     setSeasonDropdownOpen(false);
     
@@ -1149,8 +1176,8 @@ export default function StreamingApp() {
           <div className="relative z-10 px-6 md:px-12 pt-20 pb-12">
             {/* Poster acima do título */}
             <div className="text-center mb-8">
-              <div className="mb-6">
-                <div className="w-48 h-72 mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 shadow-2xl">
+              <div className={`mb-6 relative ${(selectedContent as any).logo ? 'pb-12' : ''}`}>
+                <div className="w-48 h-72 mx-auto rounded-2xl overflow-visible bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 shadow-2xl">
                   <img
                     src={selectedContent.poster} // Use poster from converted content
                     alt={selectedContent.title}
@@ -1158,10 +1185,26 @@ export default function StreamingApp() {
                     data-testid="img-poster-details"
                   />
                 </div>
+
+                {/* Logo sobreposto na parte de baixo do poster */}
+                {(selectedContent as any).logo && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-5">
+                    <img
+                      src={(selectedContent as any).logo}
+                      alt={selectedContent.title}
+                      className="max-h-20 max-w-xs object-contain drop-shadow-lg"
+                      data-testid="img-logo-details"
+                    />
+                  </div>
+                )}
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-6" data-testid="text-title">
-                {selectedContent.title}
-              </h1>
+
+              {/* Título normal se não houver logo */}
+              {!(selectedContent as any).logo && (
+                <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-6" data-testid="text-title">
+                  {selectedContent.title}
+                </h1>
+              )}
 
               {/* Tags: duração, nota IMDb, ano, gênero e classificação */}
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm mb-8">
@@ -1176,11 +1219,6 @@ export default function StreamingApp() {
                   <span className="text-white font-semibold" data-testid="text-rating">{selectedContent.rating}</span>
                 </div>
                 <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 text-white" data-testid="text-year">{selectedContent.year}</span>
-                {selectedContent.seasons && (
-                  <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 text-white" data-testid="text-seasons">
-                    {selectedContent.seasons} temporadas • {selectedContent.episodes} episódios
-                  </span>
-                )}
               </div>
             </div>
 
@@ -1233,16 +1271,18 @@ export default function StreamingApp() {
               <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
             </div>
 
-            {/* Botões Assistir e Favoritar */}
+            {/* Botões Assistir (apenas para filmes) e Favoritar */}
             <div className="flex justify-center gap-4">
-              <button
-                onClick={() => handleWatchClick(selectedContent)}
-                className="flex items-center space-x-2 px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:scale-105 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                data-testid="button-watch"
-              >
-                <Play size={18} fill="currentColor" />
-                <span>Assistir</span>
-              </button>
+              {selectedContent.type === 'movie' && (
+                <button
+                  onClick={() => handleWatchClick(selectedContent)}
+                  className="flex items-center space-x-2 px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:scale-105 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+                  data-testid="button-watch"
+                >
+                  <Play size={18} fill="currentColor" />
+                  <span>Assistir</span>
+                </button>
+              )}
               <button
                 onClick={() => toggleFavorite(selectedContent)}
                 className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all shadow-lg hover:scale-105 ${
@@ -1256,8 +1296,292 @@ export default function StreamingApp() {
                 <span>{isInList ? "Favorito" : "Favoritar"}</span>
               </button>
             </div>
+
+            {/* Linha de separação entre Botões e Episódios */}
+            {selectedContent.type === 'series' && (
+              <div className="w-full max-w-xl mx-auto mt-8 mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Seção de Episódios e Temporadas para Séries - Inline */}
+        {selectedContent.type === 'series' && (
+          <div className="bg-black">
+            <div className="px-6 md:px-12 pt-8 pb-10">
+              {/* Título da Seção - Premium Style */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">Episódios</h2>
+                </div>
+              </div>
+
+              {/* Seletor de Temporada - Dropdown Moderno */}
+              {selectedContent.seasons && selectedContent.seasons > 1 && (
+                <div className="relative mb-6 max-w-2xl mx-auto">
+                  <button
+                    onClick={() => setSeasonDropdownOpen(!seasonDropdownOpen)}
+                    className="w-full flex items-center justify-between bg-gradient-to-r from-blue-600/20 to-blue-600/20 border border-blue-500/30 hover:border-blue-400/50 text-white px-4 py-3 rounded-xl font-semibold transition-all"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Tv size={18} className="text-blue-400" />
+                      Temporada {selectedSeason}
+                    </span>
+                    <ChevronDown 
+                      size={20} 
+                      className={`text-gray-400 transition-transform duration-200 ${seasonDropdownOpen ? 'rotate-180' : ''}`} 
+                    />
+                  </button>
+                  
+                  {/* Dropdown de Temporadas */}
+                  {seasonDropdownOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-gray-900/95 backdrop-blur-lg border border-gray-700 rounded-xl overflow-hidden shadow-2xl max-h-60 overflow-y-auto z-20">
+                      {Array.from({ length: selectedContent.seasons }, (_, i) => i + 1).map((season) => {
+                        const progress = getContentProgress(selectedContent.id);
+                        const isCurrentSeason = progress?.seasonNumber === season;
+                        
+                        return (
+                          <button
+                            key={season}
+                            onClick={async () => {
+                              setSelectedSeason(season);
+                              setSeasonDropdownOpen(false);
+                              setExpandedEpisodeSynopsis(null);
+                              try {
+                                const response = await fetch(`https://api.themoviedb.org/3/tv/${selectedContent.id}/season/${season}?api_key=684c7dd6657929028f2ad1bd1ef6e3c8&language=pt-BR`);
+                                const data = await response.json();
+                                setSeasonData(data);
+                              } catch (error) {
+                                console.error("Erro ao carregar temporada:", error);
+                              }
+                            }}
+                            className={`w-full flex items-center justify-between px-4 py-3 transition-all ${
+                              selectedSeason === season
+                                ? 'bg-blue-600/30 text-white'
+                                : 'text-gray-300 hover:bg-gray-800'
+                            }`}
+                          >
+                            <span>Temporada {season}</span>
+                            {isCurrentSeason && (
+                              <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded-full">
+                                Assistindo
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Lista de Episódios - Premium Grid Layout */}
+              <div className="max-w-7xl mx-auto">
+                {seasonData && seasonData.episodes && (
+                  <div className="grid grid-cols-2 gap-4">
+                    {seasonData.episodes.map((episode: any) => {
+                      const progress = getContentProgress(selectedContent.id);
+                      const isWatching = progress?.seasonNumber === selectedSeason && progress?.episodeNumber === episode.episode_number;
+                      const isExpanded = expandedEpisodeSynopsis === episode.episode_number;
+                      const isNew = episode.air_date && new Date(episode.air_date) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                      const isFutureEpisode = episode.air_date && new Date(episode.air_date) > new Date();
+                      const episodeLinks = (selectedContent as any).episodeLinks || [];
+                      const hasEpisodeLink = episodeLinks.some((link: any) => 
+                        Number(link.season) === selectedSeason && 
+                        Number(link.episode) === episode.episode_number && 
+                        link.url && link.url.trim() !== ''
+                      );
+                      const hasNoLink = !hasEpisodeLink;
+                      const isLocked = isFutureEpisode || hasNoLink;
+                      const showCalendarIcon = isFutureEpisode && !hasNoLink;
+                      const showVideoOffIcon = hasNoLink && !isFutureEpisode;
+                      
+                      return (
+                        <div
+                          key={episode.episode_number}
+                          className={`group relative rounded-2xl transition-all duration-300 flex flex-col h-fit ${
+                            isWatching 
+                              ? 'bg-gradient-to-b from-blue-600/40 to-blue-900/20 border-2 border-blue-500/60 shadow-xl shadow-blue-500/30'
+                              : isLocked
+                              ? 'bg-gradient-to-b from-gray-700/50 to-gray-800/30 border border-gray-700/40 shadow-lg grayscale opacity-60'
+                              : 'bg-gradient-to-b from-gray-900/90 to-gray-900/40 border border-gray-700/60 hover:border-blue-500/50 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20'
+                          } overflow-hidden`}
+                        >
+                          {/* Animated background glow */}
+                          <div className={`absolute inset-0 bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/0 ${!isLocked && 'group-hover:from-blue-500/15 group-hover:via-blue-500/5 group-hover:to-transparent'} transition-all duration-500 pointer-events-none`} />
+                          
+                          {/* Card Principal - Premium Grid Layout */}
+                          <div 
+                            onClick={() => !isLocked && playEpisode(selectedContent.id, selectedSeason, episode.episode_number, false, episode.name)}
+                            className={`relative flex flex-col ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                          >
+                            {/* Miniatura do Episódio - Full Width Premium Style */}
+                            <div className="relative w-full overflow-hidden flex-shrink-0">
+                              <div className={`aspect-video rounded-t-2xl overflow-hidden bg-gray-800 border-0 transition-all duration-300 relative`}>
+                                <img
+                                  src={episode.still_path 
+                                    ? `https://image.tmdb.org/t/p/w500${episode.still_path}`
+                                    : selectedContent.backdrop || selectedContent.poster
+                                  }
+                                  alt={episode.name}
+                                  className={`w-full h-full object-cover transition-transform duration-500 ${isLocked ? 'grayscale' : 'group-hover:scale-110'}`}
+                                />
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                
+                                {/* Progress Bar - Episódios Assistidos */}
+                                {progress && progress.seasonNumber === selectedSeason && progress.episodeNumber === episode.episode_number && (
+                                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700/30">
+                                    <div 
+                                      className="h-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300"
+                                      style={{ width: `${Math.min((progress.currentTime / progress.duration) * 100, 100)}%` }}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                              
+                              {/* Play Button - Premium */}
+                              {!isLocked && (
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-full shadow-lg shadow-blue-500/50 group-hover:scale-110 transition-transform duration-300">
+                                    <Play size={24} className="text-white" fill="currentColor" />
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Video Off Icon - Episódio sem Link */}
+                              {showVideoOffIcon && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                  <div className="text-white/70">
+                                    <VideoOff size={28} />
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Calendar Icon - Episódio Futuro */}
+                              {showCalendarIcon && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                  <div className="text-white/70">
+                                    <CalendarDays size={28} />
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Badge de Assistindo - Premium */}
+                              {isWatching && (
+                                <div className="absolute top-2 left-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-full shadow-lg shadow-cyan-500/60 flex items-center gap-1.5 backdrop-blur-sm border border-cyan-400/50">
+                                  <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
+                                  ASSISTINDO
+                                </div>
+                              )}
+                              
+                              {/* Badge de Assistido - Premium */}
+                              {progress && progress.seasonNumber === selectedSeason && progress.episodeNumber === episode.episode_number && progress.currentTime >= progress.duration * 0.95 && !isWatching && (
+                                <div className="absolute top-2 left-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-full shadow-lg shadow-green-500/60 flex items-center gap-1.5 backdrop-blur-sm border border-green-400/50">
+                                  <Check size={12} />
+                                  ASSISTIDO
+                                </div>
+                              )}
+                              
+                              {/* Badge de Completo - Para episódios já completamente assistidos (salvo) */}
+                              {progress && progress.seasonNumber === selectedSeason && progress.episodeNumber === episode.episode_number && progress.currentTime >= progress.duration * 0.99 && (
+                                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-500 to-emerald-600 shadow-lg shadow-green-500/60" />
+                              )}
+                              
+                              {/* Badge de Novo - Premium */}
+                              {isNew && !isWatching && (
+                                <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg shadow-orange-500/50">
+                                  NOVO
+                                </div>
+                              )}
+                            </div>
+                            
+                            {/* Info do Episódio - Premium Grid Card */}
+                            <div className="flex-1 flex flex-col justify-between p-3">
+                              {/* Top Row - Episode Title & Number */}
+                              <div>
+                                <div className="flex items-start justify-between gap-1.5 mb-1.5">
+                                  <div>
+                                    <h3 className="text-white font-bold text-sm line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
+                                      {episode.name}
+                                    </h3>
+                                    <p className="text-blue-400 text-xs font-semibold mt-0.5">EP {episode.episode_number}</p>
+                                  </div>
+                                  {isNew && !isWatching && (
+                                    <span className="text-[10px] font-bold text-orange-400 bg-orange-500/20 px-1.5 py-0.5 rounded-full flex-shrink-0">
+                                      NOVO
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              
+                              {/* Metadata Row */}
+                              <div className="flex flex-wrap items-center gap-2 text-[11px] text-gray-400 pt-1.5">
+                                {episode.vote_average && (
+                                  <div className="flex items-center gap-1">
+                                    <span className="text-yellow-400">★</span>
+                                    <span className="text-yellow-400 font-semibold">{episode.vote_average.toFixed(1)}</span>
+                                  </div>
+                                )}
+                                {episode.runtime && (
+                                  <div className="flex items-center gap-1">
+                                    <Clock size={11} />
+                                    <span>{episode.runtime}min</span>
+                                  </div>
+                                )}
+                                {episode.air_date && (
+                                  <span className={isLocked ? 'text-gray-600' : 'text-gray-500'}>
+                                    {new Date(episode.air_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' })}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Sinopse - Premium Expandível (Inline) */}
+                          {episode.overview && (
+                            <div className="px-3 pb-2 border-t border-gray-700/30">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setExpandedEpisodeSynopsis(isExpanded ? null : episode.episode_number);
+                                }}
+                                className="flex items-center justify-between w-full py-1.5 text-blue-400 hover:text-blue-300 text-[11px] font-medium transition-all duration-300"
+                              >
+                                <span className="flex items-center gap-1">
+                                  <Info size={10} />
+                                  Sinopse
+                                </span>
+                                {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                              </button>
+                              
+                              {/* Sinopse Expandida */}
+                              {isExpanded && (
+                                <p className="text-gray-300 text-[10px] leading-relaxed mt-1 pb-1">
+                                  {episode.overview}
+                                </p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Loading State */}
+                {!seasonData && (
+                  <div className="flex flex-col items-center justify-center py-12">
+                    <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-400">Carregando episódios...</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Player de Vídeo Moderno Estilo Netflix/Apple TV */}
         {showPlayer && selectedContent && (
@@ -1284,290 +1608,6 @@ export default function StreamingApp() {
               }
             }}
           />
-        )}
-
-        {/* Modal de Episódios para Séries - Design Moderno */}
-        {showEpisodesModal && selectedContent && (
-          <div className="fixed inset-0 z-50 bg-black/95 overflow-y-auto">
-            <div className="min-h-screen">
-              {/* Header Fixo com Backdrop */}
-              <div className="sticky top-0 z-10 bg-gradient-to-b from-black via-black/95 to-transparent pb-4">
-                <div className="px-4 pt-4 pb-2">
-                  <div className="max-w-4xl mx-auto">
-                    {/* Botão Fechar e Título */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <button
-                        onClick={() => {
-                          setShowEpisodesModal(false);
-                          setExpandedEpisodeSynopsis(null);
-                          setSeasonDropdownOpen(false);
-                        }}
-                        className="bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all flex-shrink-0"
-                      >
-                        <ArrowLeft size={20} />
-                      </button>
-                      <div className="flex-1 min-w-0">
-                        <h2 className="text-lg md:text-xl font-bold text-white truncate">{selectedContent.title}</h2>
-                        <p className="text-gray-400 text-sm">
-                          {seasonData?.episodes?.length || 0} episódios
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setShowEpisodesModal(false);
-                          setExpandedEpisodeSynopsis(null);
-                          setSeasonDropdownOpen(false);
-                        }}
-                        className="bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all flex-shrink-0"
-                      >
-                        <X size={20} />
-                      </button>
-                    </div>
-
-                    {/* Seletor de Temporada - Dropdown Moderno */}
-                    {selectedContent.seasons && selectedContent.seasons > 1 && (
-                      <div className="relative">
-                        <button
-                          onClick={() => setSeasonDropdownOpen(!seasonDropdownOpen)}
-                          className="w-full flex items-center justify-between bg-gradient-to-r from-blue-600/20 to-blue-600/20 border border-blue-500/30 hover:border-blue-400/50 text-white px-4 py-3 rounded-xl font-semibold transition-all"
-                        >
-                          <span className="flex items-center gap-2">
-                            <Tv size={18} className="text-blue-400" />
-                            Temporada {selectedSeason}
-                          </span>
-                          <ChevronDown 
-                            size={20} 
-                            className={`text-gray-400 transition-transform duration-200 ${seasonDropdownOpen ? 'rotate-180' : ''}`} 
-                          />
-                        </button>
-                        
-                        {/* Dropdown de Temporadas */}
-                        {seasonDropdownOpen && (
-                          <div className="absolute top-full left-0 right-0 mt-2 bg-gray-900/95 backdrop-blur-lg border border-gray-700 rounded-xl overflow-hidden shadow-2xl max-h-60 overflow-y-auto z-20">
-                            {Array.from({ length: selectedContent.seasons }, (_, i) => i + 1).map((season) => {
-                              const progress = getContentProgress(selectedContent.id);
-                              const isCurrentSeason = progress?.seasonNumber === season;
-                              
-                              return (
-                                <button
-                                  key={season}
-                                  onClick={async () => {
-                                    setSelectedSeason(season);
-                                    setSeasonDropdownOpen(false);
-                                    setExpandedEpisodeSynopsis(null);
-                                    try {
-                                      const response = await fetch(`https://api.themoviedb.org/3/tv/${selectedContent.id}/season/${season}?api_key=684c7dd6657929028f2ad1bd1ef6e3c8&language=pt-BR`);
-                                      const data = await response.json();
-                                      setSeasonData(data);
-                                    } catch (error) {
-                                      console.error("Erro ao carregar temporada:", error);
-                                    }
-                                  }}
-                                  className={`w-full flex items-center justify-between px-4 py-3 transition-all ${
-                                    selectedSeason === season
-                                      ? 'bg-blue-600/30 text-white'
-                                      : 'text-gray-300 hover:bg-gray-800'
-                                  }`}
-                                >
-                                  <span>Temporada {season}</span>
-                                  {isCurrentSeason && (
-                                    <span className="text-xs bg-blue-500/30 text-blue-300 px-2 py-1 rounded-full">
-                                      Assistindo
-                                    </span>
-                                  )}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Lista de Episódios - Premium Layout */}
-              <div className="px-4 pb-8">
-                <div className="max-w-4xl mx-auto">
-                  {seasonData && seasonData.episodes && (
-                    <div className="space-y-4">
-                      {seasonData.episodes.map((episode: any) => {
-                        const progress = getContentProgress(selectedContent.id);
-                        const isWatching = progress?.seasonNumber === selectedSeason && progress?.episodeNumber === episode.episode_number;
-                        const isExpanded = expandedEpisodeSynopsis === episode.episode_number;
-                        const isNew = episode.air_date && new Date(episode.air_date) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-                        const isReleased = episode.air_date ? new Date(episode.air_date) <= new Date() : true; // If no air_date, assume released
-                        const isFutureEpisode = episode.air_date && new Date(episode.air_date) > new Date(); // Only future if has date and date is in future
-                        const episodeLinks = selectedContent.episodeLinks || [];
-                        const hasEpisodeLink = episodeLinks.some(link => 
-                          Number(link.season) === selectedSeason && 
-                          Number(link.episode) === episode.episode_number && 
-                          link.url && link.url.trim() !== ''
-                        );
-                        const hasNoLink = !hasEpisodeLink;
-                        const isLocked = isFutureEpisode || hasNoLink;
-                        const showCalendarIcon = isFutureEpisode && !hasNoLink;
-                        const showVideoOffIcon = hasNoLink && !isFutureEpisode;
-                        
-                        return (
-                          <div
-                            key={episode.episode_number}
-                            className={`group relative overflow-hidden rounded-2xl transition-all duration-300 ${
-                              isWatching 
-                                ? 'bg-gradient-to-r from-blue-600/30 via-blue-500/20 to-transparent border-2 border-blue-500/60 shadow-lg shadow-blue-500/30'
-                                : isLocked
-                                ? 'bg-gradient-to-r from-gray-700/50 via-gray-600/30 to-gray-700/30 border border-gray-700/40 shadow-lg grayscale opacity-60'
-                                : 'bg-gradient-to-r from-gray-900/80 via-gray-800/40 to-gray-900/30 border border-gray-800/60 hover:border-blue-500/40 shadow-lg hover:shadow-xl hover:shadow-blue-500/20'
-                            }`}
-                          >
-                            {/* Animated background glow */}
-                            <div className={`absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-blue-500/0 ${!isLocked && 'group-hover:from-blue-500/10 group-hover:via-blue-500/5 group-hover:to-transparent'} transition-all duration-500 pointer-events-none`} />
-                            
-                            {/* Card Principal - Premium Layout */}
-                            <div 
-                              onClick={() => !isLocked && playEpisode(selectedContent.id, selectedSeason, episode.episode_number, false, episode.name)}
-                              className={`relative flex gap-3 sm:gap-4 p-3 sm:p-4 ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-                            >
-                              {/* Miniatura do Episódio - Premium Style */}
-                              <div className="relative w-24 sm:w-32 md:w-40 flex-shrink-0">
-                                <div className={`aspect-video rounded-xl overflow-hidden bg-gray-800 border transition-all duration-300 ${isLocked ? 'border-gray-700/30' : 'border-gray-700/50 group-hover:border-blue-500/50'}`}>
-                                  <img
-                                    src={episode.still_path 
-                                      ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
-                                      : selectedContent.backdrop || selectedContent.poster
-                                    }
-                                    alt={episode.name}
-                                    className={`w-full h-full object-cover transition-transform duration-300 ${isLocked ? 'grayscale' : 'group-hover:scale-105'}`}
-                                  />
-                                  {/* Gradient overlay */}
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                </div>
-                                
-                                {/* Play Button - Premium */}
-                                {!isLocked && (
-                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                    <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-full shadow-lg shadow-blue-500/50 group-hover:scale-110 transition-transform duration-300">
-                                      <Play size={24} className="text-white" fill="currentColor" />
-                                    </div>
-                                  </div>
-                                )}
-                                
-                                {/* Video Off Icon - Episódio sem Link */}
-                                {showVideoOffIcon && (
-                                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                                    <div className="text-white/70">
-                                      <VideoOff size={28} />
-                                    </div>
-                                  </div>
-                                )}
-                                
-                                {/* Calendar Icon - Episódio Futuro */}
-                                {showCalendarIcon && (
-                                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                                    <div className="text-white/70">
-                                      <CalendarDays size={28} />
-                                    </div>
-                                  </div>
-                                )}
-                                
-                                {/* Badge de Assistindo - Premium */}
-                                {isWatching && (
-                                  <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-lg shadow-blue-500/50 flex items-center gap-1">
-                                    <Check size={12} />
-                                    ASSISTINDO
-                                  </div>
-                                )}
-                                
-                                {/* Badge de Novo - Premium */}
-                                {isNew && !isWatching && (
-                                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg shadow-orange-500/50">
-                                    NOVO
-                                  </div>
-                                )}
-                              </div>
-                              
-                              {/* Info do Episódio - Premium */}
-                              <div className="flex-1 min-w-0 flex flex-col justify-between">
-                                {/* Top Row */}
-                                <div>
-                                  <div className="flex items-center gap-2 mb-1.5">
-                                    <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent font-bold text-sm">
-                                      EP {episode.episode_number}
-                                    </span>
-                                    {episode.vote_average && (
-                                      <div className="flex items-center gap-1 bg-yellow-500/20 px-2 py-0.5 rounded-full">
-                                        <span className="text-yellow-400 text-xs font-semibold">{episode.vote_average.toFixed(1)}</span>
-                                        <span className="text-yellow-400 text-xs">★</span>
-                                      </div>
-                                    )}
-                                    {episode.runtime && (
-                                      <span className="text-gray-400 text-xs flex items-center gap-1 ml-auto">
-                                        <Clock size={11} />
-                                        {episode.runtime}min
-                                      </span>
-                                    )}
-                                  </div>
-                                  <h3 className="text-white font-semibold text-sm md:text-base mb-1.5 line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
-                                    {episode.name}
-                                  </h3>
-                                </div>
-                                
-                                {/* Bottom Row */}
-                                {episode.air_date && (
-                                  <span className={`text-xs flex items-center gap-1 ${isLocked ? 'text-gray-600' : 'text-gray-500'}`}>
-                                    {new Date(episode.air_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Separator */}
-                            {episode.overview && (
-                              <div className="h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent" />
-                            )}
-
-                            {/* Sinopse - Premium Expandível */}
-                            {episode.overview && (
-                              <div className="px-4 pb-3">
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setExpandedEpisodeSynopsis(isExpanded ? null : episode.episode_number);
-                                  }}
-                                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-medium transition-all duration-300 w-full group/btn"
-                                >
-                                  <Info size={14} className="group-hover/btn:rotate-12 transition-transform duration-300" />
-                                  <span>Ver sinopse</span>
-                                  <div className="ml-auto">
-                                    {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                                  </div>
-                                </button>
-                                
-                                {/* Sinopse Expandida - Premium */}
-                                <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 mt-3' : 'max-h-0'}`}>
-                                  <p className="text-gray-300 text-sm leading-relaxed bg-gradient-to-br from-blue-500/10 to-cyan-500/5 p-3 rounded-lg border border-blue-500/20 backdrop-blur-sm">
-                                    {episode.overview}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {/* Loading State */}
-                  {!seasonData && (
-                    <div className="flex flex-col items-center justify-center py-12">
-                      <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-                      <p className="text-gray-400">Carregando episódios...</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
         )}
       </div>
     );
