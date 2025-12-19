@@ -1176,8 +1176,8 @@ export default function StreamingApp() {
           <div className="relative z-10 px-6 md:px-12 pt-20 pb-12">
             {/* Poster acima do título */}
             <div className="text-center mb-8">
-              <div className={`mb-6 relative ${(selectedContent as any).logo ? 'pb-12' : ''}`}>
-                <div className="w-48 h-72 mx-auto rounded-2xl overflow-visible bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 shadow-2xl">
+              <div className="mb-6">
+                <div className="w-48 h-72 mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 shadow-2xl">
                   <img
                     src={selectedContent.poster} // Use poster from converted content
                     alt={selectedContent.title}
@@ -1185,22 +1185,19 @@ export default function StreamingApp() {
                     data-testid="img-poster-details"
                   />
                 </div>
-
-                {/* Logo sobreposto na parte de baixo do poster */}
-                {(selectedContent as any).logo && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-5">
-                    <img
-                      src={(selectedContent as any).logo}
-                      alt={selectedContent.title}
-                      className="max-h-20 max-w-xs object-contain drop-shadow-lg"
-                      data-testid="img-logo-details"
-                    />
-                  </div>
-                )}
               </div>
 
-              {/* Título normal se não houver logo */}
-              {!(selectedContent as any).logo && (
+              {/* Logo abaixo do poster */}
+              {(selectedContent as any).logo ? (
+                <div className="mb-8 h-16 flex items-center justify-center">
+                  <img
+                    src={(selectedContent as any).logo}
+                    alt={selectedContent.title}
+                    className="max-h-16 max-w-xs object-contain"
+                    data-testid="img-logo-details"
+                  />
+                </div>
+              ) : (
                 <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-6" data-testid="text-title">
                   {selectedContent.title}
                 </h1>
@@ -2414,8 +2411,8 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
 // Logo oficial do IMDb (kept for consistency, can be replaced if TMDB rating is preferred)
 const IMDbIcon = ({ size = 16, className = "" }: { size?: number, className?: string }) => (
   <img
-    src="https://png.pngtree.com/png-vector/20240914/ourmid/pngtree-3d-yellow-star-on-a-transparent-background-png-image_13837284.png"
-    alt="IMDb"
+    src="https://png.pngtree.com/png-clipart/20250606/original/pngtree-3d-glossy-yellow-star-icon-illustration-png-image_21131012.png"
+    alt="Star"
     width={size * 1}
     height={size}
     className={className}
