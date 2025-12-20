@@ -164,11 +164,26 @@ async function fetchLogo(tmdbId: number, type: 'movie' | 'tv'): Promise<string |
     const endpoint = type === 'movie' ? `/movie/${tmdbId}/images` : `/tv/${tmdbId}/images`;
     const response = await fetchTMDB(endpoint);
     
+    console.log(`Buscando logos para ${type} ID ${tmdbId}:`, response.logos);
+    
     if (response.logos && response.logos.length > 0) {
-      // Priorizar logos com iso_639_1 = null (universal) ou PT-BR
-      let selectedLogo = response.logos.find((logo: any) => logo.iso_639_1 === null) || response.logos[0];
-      return `${TMDB_IMAGE_BASE}/w500${selectedLogo.file_path}`;
+      // Filtrar logos grandes (width >= 300 é considerado grande)
+      const largeLogos = response.logos.filter((logo: any) => (logo.width || 0) >= 300);
+      const availableLogos = largeLogos.length > 0 ? largeLogos : response.logos;
+      
+      // Priorizar: PT-BR > EN > Universal (null) > Qualquer um
+      let selectedLogo = 
+        availableLogos.find((logo: any) => logo.iso_639_1 === 'pt') || // Português-Brasil
+        availableLogos.find((logo: any) => logo.iso_639_1 === 'en') || // Inglês (fallback)
+        availableLogos.find((logo: any) => logo.iso_639_1 === null) || // Universal
+        availableLogos[0]; // Qualquer logo disponível
+      
+      console.log(`Logo selecionado para ${tmdbId}:`, selectedLogo);
+      // Usar w780 para logos grandes, w342 para logos pequenos
+      const width = (selectedLogo.width || 0) >= 300 ? 'w780' : 'w342';
+      return `${TMDB_IMAGE_BASE}/${width}${selectedLogo.file_path}`;
     }
+    console.log(`Nenhum logo encontrado para ${type} ID ${tmdbId}`);
     return null;
   } catch (error) {
     console.error("Error fetching logo:", error);
@@ -481,8 +496,8 @@ export default function StreamingApp() {
   const [currentEpisodeInfo, setCurrentEpisodeInfo] = useState<{season: number; episode: number; episodeTitle?: string} | null>(null);
   const [playerInitialTime, setPlayerInitialTime] = useState(0);
   
-  // Lock screen to portrait when not in player mode
-  useLockPortrait(!showPlayer);
+  // Lock screen to portrait mode always
+  useLockPortrait(true);
   
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -818,9 +833,12 @@ export default function StreamingApp() {
 
   // Reproduzir episódio específico (com fallback para modal de episódios se falhar)
   const playEpisode = async (contentId: string, season: number, episode: number, fallbackToModal: boolean = false, episodeTitle?: string) => {
-    // Definir o conteúdo selecionado imediatamente
+    // Manter o logo do conteúdo selecionado ao reproduzir episódio
     const content = allContent.find(c => c.id === contentId);
-    if (content) {
+    if (content && selectedContent && selectedContent.id === contentId && (selectedContent as any).logo) {
+      // Manter o logo se já existir
+      setSelectedContent({ ...content, logo: (selectedContent as any).logo } as ExtendedContent);
+    } else if (content) {
       setSelectedContent(content);
     }
     
@@ -900,7 +918,20 @@ export default function StreamingApp() {
       nextEpisode = 1;
     }
     
-    playEpisode(selectedContent.id, nextSeason, nextEpisode, false);
+    // Buscar título do próximo episódio do TMDB
+    let nextEpisodeTitle = undefined;
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/tv/${content.id}/season/${nextSeason}?api_key=684c7dd6657929028f2ad1bd1ef6e3c8&language=pt-BR`);
+      const data = await response.json();
+      const episodeData = data.episodes?.find((ep: any) => ep.episode_number === nextEpisode);
+      if (episodeData?.name) {
+        nextEpisodeTitle = episodeData.name;
+      }
+    } catch (error) {
+      console.error("Erro ao buscar título do episódio:", error);
+    }
+    
+    playEpisode(selectedContent.id, nextSeason, nextEpisode, false, nextEpisodeTitle);
   };
 
   // Verificar se há próximo episódio
@@ -932,6 +963,10 @@ export default function StreamingApp() {
     setPlayerUrl("");
     setIsVideoPlayer(false);
     setCurrentEpisodeInfo(null);
+    // Se há conteúdo selecionado, voltar para a view de detalhes com o logo
+    if (selectedContent) {
+      setCurrentView("details");
+    }
   };
 
   // Função para lidar com clique em "Assistir"
