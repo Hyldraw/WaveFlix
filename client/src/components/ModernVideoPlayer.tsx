@@ -47,7 +47,8 @@ export default function ModernVideoPlayer({
   onProgress,
   initialTime = 0
 }: ModernVideoPlayerProps) {
-  useLockLandscape();
+  // Always lock to landscape when this component is mounted
+  useLockLandscape(true);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -158,6 +159,12 @@ export default function ModernVideoPlayer({
       video.removeEventListener("ended", handleEnded);
     };
   }, [initialTime, onProgress, hasNextEpisode, onNextEpisode, isDraggingProgress]);
+
+  useEffect(() => {
+    // Reset next episode prompt when video URL changes (new episode loaded)
+    setShowNextEpisodePrompt(false);
+    setCurrentTime(0);
+  }, [videoUrl, episodeInfo]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -381,8 +388,6 @@ export default function ModernVideoPlayer({
       
       if (Math.abs(diff) > 50) {
         skip(diff > 0 ? 10 : -10);
-      } else if (Math.abs(diff) < 10) {
-        togglePlay();
       }
     }
     setTouchStartX(null);
@@ -431,7 +436,6 @@ export default function ModernVideoPlayer({
         className="w-full h-full object-contain"
         playsInline
         autoPlay
-        onClick={togglePlay}
       />
 
       {isLoading && !hasError && (
@@ -614,16 +618,6 @@ export default function ModernVideoPlayer({
             </div>
 
             <div className="flex items-center gap-2 md:gap-3">
-              {hasNextEpisode && onNextEpisode && (
-                <button
-                  onClick={onNextEpisode}
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white text-sm font-semibold"
-                >
-                  <span>Próximo</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              )}
-
               <div className="relative">
                 <button
                   onClick={() => setShowSettings(!showSettings)}
@@ -672,31 +666,15 @@ export default function ModernVideoPlayer({
       </div>
 
       {showNextEpisodePrompt && hasNextEpisode && onNextEpisode && (
-        <div className="absolute bottom-28 right-4 md:right-8 bg-gray-900/95 backdrop-blur-lg rounded-2xl border border-white/10 p-4 md:p-5 shadow-2xl max-w-xs">
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-blue-600/20 rounded-lg">
-              <Tv className="w-6 h-6 text-blue-400" />
-            </div>
-            <div className="flex-1">
-              <p className="text-white font-semibold mb-1">Próximo episódio</p>
-              <p className="text-gray-400 text-sm mb-3">Reproduzir automaticamente em breve</p>
-              <div className="flex gap-2">
-                <button
-                  onClick={onNextEpisode}
-                  className="flex-1 px-4 py-2 bg-white text-black rounded-lg font-semibold hover:bg-gray-200 transition-all text-sm"
-                >
-                  Assistir agora
-                </button>
-                <button
-                  onClick={() => setShowNextEpisodePrompt(false)}
-                  className="px-3 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <button
+          onClick={() => {
+            setShowNextEpisodePrompt(false);
+            onNextEpisode?.();
+          }}
+          className="absolute bottom-24 right-4 md:right-8 px-6 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold rounded-lg transition-all text-sm border border-white/20 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        >
+          Próximo Episódio
+        </button>
       )}
 
       <button
