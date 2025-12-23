@@ -11,6 +11,7 @@ import {
   Film,
   Heart,
   ArrowLeft,
+  ChevronLeft,
   Info,
   Plus,
   Check,
@@ -495,12 +496,26 @@ export default function StreamingApp() {
   const [showEpisodesModal, setShowEpisodesModal] = useState(false);
   const [currentEpisodeInfo, setCurrentEpisodeInfo] = useState<{season: number; episode: number; episodeTitle?: string} | null>(null);
   const [playerInitialTime, setPlayerInitialTime] = useState(0);
+  const [navigationStack, setNavigationStack] = useState<Array<{
+    view: string;
+    selectedContent: Content | null;
+    searchTerm: string;
+    selectedCategory: string | null;
+    activeCategory: string;
+  }>>([{
+    view: "home",
+    selectedContent: null,
+    searchTerm: "",
+    selectedCategory: null,
+    activeCategory: "home"
+  }]);
   
   // Lock screen to portrait mode always
   useLockPortrait(true);
   
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const [featuredWithLogos, setFeaturedWithLogos] = useState<ExtendedContent[]>([]);
 
   // Hooks for local images (kept for potential fallback or specific assets)
   const { getActorImage, getPosterImage } = useLocalImages();
@@ -519,6 +534,30 @@ export default function StreamingApp() {
   const featuredContent = allContent.filter((item: ExtendedContent) => 
     item.status?.includes('featured') || item.featured
   );
+
+  // Fetch logos for featured content
+  useEffect(() => {
+    const enrichFeaturedWithLogos = async () => {
+      if (featuredContent.length === 0) {
+        setFeaturedWithLogos([]);
+        return;
+      }
+      
+      const enrichedContent = await Promise.all(
+        featuredContent.map(async (item) => {
+          if (!item.logo) {
+            const logo = await fetchLogo(parseInt(item.id), item.type === 'series' ? 'tv' : 'movie');
+            return { ...item, logo: logo || undefined } as ExtendedContent;
+          }
+          return item;
+        })
+      );
+      
+      setFeaturedWithLogos(enrichedContent);
+    };
+    
+    enrichFeaturedWithLogos();
+  }, [featuredContent]);
 
   // Fetch user list from your API
   const { data: userListContent = [] } = useQuery<Content[]>({
@@ -979,11 +1018,44 @@ export default function StreamingApp() {
   };
 
   const goBack = () => {
-    setCurrentView("home");
-    setSelectedContent(null);
-    setSearchTerm("");
-    setSelectedCategory(null);
-    window.scrollTo(0, 0);
+    if (navigationStack.length > 1) {
+      const newStack = navigationStack.slice(0, -1);
+      const previousState = newStack[newStack.length - 1];
+      setNavigationStack(newStack);
+      setCurrentView(previousState.view);
+      setSelectedContent(previousState.selectedContent);
+      setSearchTerm(previousState.searchTerm);
+      setSelectedCategory(previousState.selectedCategory);
+      setActiveCategory(previousState.activeCategory);
+      window.scrollTo(0, 0);
+    } else {
+      setCurrentView("home");
+      setSelectedContent(null);
+      setSearchTerm("");
+      setSelectedCategory(null);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const pushNavigation = (
+    newView: string,
+    newSelectedContent: Content | null,
+    newSearchTerm: string = "",
+    newSelectedCategory: string | null = null,
+    newActiveCategory: string = activeCategory
+  ) => {
+    setNavigationStack(prev => [...prev, {
+      view: newView,
+      selectedContent: newSelectedContent,
+      searchTerm: newSearchTerm,
+      selectedCategory: newSelectedCategory,
+      activeCategory: newActiveCategory
+    }]);
+    setCurrentView(newView);
+    setSelectedContent(newSelectedContent);
+    setSearchTerm(newSearchTerm);
+    setSelectedCategory(newSelectedCategory);
+    setActiveCategory(newActiveCategory);
   };
 
   const openSearch = () => {
@@ -1016,7 +1088,8 @@ export default function StreamingApp() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (featuredContent.length > 1 && activeCategory === "home") {
+    const contentLength = featuredContent.length;
+    if (contentLength > 1 && activeCategory === "home") {
       setProgress(0);
 
       // Progress animation
@@ -1027,13 +1100,13 @@ export default function StreamingApp() {
           }
           return prev + 1;
         });
-      }, 100); // 100ms * 100 = 10 seconds
+      }, 100);
 
       // Content rotation
       const contentInterval = setInterval(() => {
         setFadeClass('fade-out');
         setTimeout(() => {
-          setFeaturedIndex((prev) => (prev + 1) % featuredContent.length);
+          setFeaturedIndex((prev) => (prev + 1) % contentLength);
           setFadeClass('fade-in');
           setProgress(0);
         }, 500);
@@ -1046,9 +1119,6 @@ export default function StreamingApp() {
     }
   }, [featuredContent.length, activeCategory]);
 
-  const currentFeatured = featuredContent[featuredIndex] || featuredContent[0];
-
-
   // Search page view
   if (currentView === "search") {
     return (
@@ -1059,9 +1129,8 @@ export default function StreamingApp() {
             {/* Welcome Text */}
             <div className="text-center mb-6">
               <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-white via-blue-200 to-blue-200 bg-clip-text text-transparent mb-2">
-                🔍 Descobrir Conteúdo
+                🔍 Procurar
               </h1>
-              <p className="text-gray-300 text-lg">Encontre seus filmes e séries favoritos</p>
             </div>
 
             {/* Enhanced Search Input */}
@@ -1191,30 +1260,32 @@ export default function StreamingApp() {
 
     return (
       <div className="min-h-screen bg-background text-foreground">
-        {/* Seção com banner: título, informações e atores */}
+        {/* Seção com banner: título, informações */}
         <div
-          className="relative bg-cover bg-center"
-          style={{ backgroundImage: `url(${selectedContent.backdrop})` }} // Use backdrop from converted content
+          className="relative bg-cover bg-center overflow-hidden"
+          style={{ 
+            backgroundImage: `url(${selectedContent.backdrop})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
         >
           <div className="absolute inset-0 details-gradient" />
 
           <button
             onClick={goBack}
-            className="absolute top-6 left-6 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-black/80 transition-colors"
+            className="absolute top-6 left-6 z-20 flex items-center justify-center w-12 h-12 bg-gray-500/30 backdrop-blur-md rounded-full border border-gray-400/50 hover:bg-gray-500/50 transition-all duration-300 shadow-lg"
             data-testid="button-back"
           >
-            <ArrowLeft size={20} />
-            <span>Voltar</span>
+            <ChevronLeft size={28} className="text-white" />
           </button>
 
-
           <div className="relative z-10 px-6 md:px-12 pt-20 pb-12">
-            {/* Poster acima do título */}
+            {/* Poster e Informações */}
             <div className="text-center mb-8">
               <div className="mb-6">
                 <div className="w-48 h-72 mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 shadow-2xl">
                   <img
-                    src={selectedContent.poster} // Use poster from converted content
+                    src={selectedContent.poster}
                     alt={selectedContent.title}
                     className="w-full h-full object-cover"
                     data-testid="img-poster-details"
@@ -1222,44 +1293,82 @@ export default function StreamingApp() {
                 </div>
               </div>
 
-              {/* Logo abaixo do poster */}
-              {(selectedContent as any).logo ? (
-                <div className="mb-8 h-16 flex items-center justify-center">
-                  <img
-                    src={(selectedContent as any).logo}
-                    alt={selectedContent.title}
-                    className="max-h-16 max-w-xs object-contain"
-                    data-testid="img-logo-details"
-                  />
-                </div>
-              ) : (
-                <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-6" data-testid="text-title">
-                  {selectedContent.title}
-                </h1>
-              )}
+              {/* Título */}
+              <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-6" data-testid="text-title">
+                {selectedContent.title}
+              </h1>
 
-              {/* Tags: duração, nota IMDb, ano, gênero e classificação */}
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm mb-8">
-                {selectedContent.duration && ( // Duration might not be directly available from TMDB in Content schema
-                  <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                    <Clock size={14} />
-                    <span className="text-white" data-testid="text-duration">{selectedContent.duration}</span>
-                  </div>
-                )}
+              {/* Ano e Nota (Rating) */}
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+                <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 text-white" data-testid="text-year">{selectedContent.year}</span>
                 <div className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-yellow-400/30">
                   <IMDbIcon size={16} className="text-yellow-400" />
                   <span className="text-white font-semibold" data-testid="text-rating">{selectedContent.rating}</span>
                 </div>
-                <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 text-white" data-testid="text-year">{selectedContent.year}</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Botões Play e Favoritar */}
+        <div className="bg-black px-6 md:px-12 py-6 flex flex-col gap-3">
+          {selectedContent.type === 'movie' && (
+            <button
+              onClick={() => handleWatchClick(selectedContent)}
+              className="w-full h-12 flex items-center justify-center gap-2 font-semibold transition-all rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+              data-testid="button-watch"
+            >
+              <Play size={18} fill="currentColor" />
+              <span>Assistir</span>
+            </button>
+          )}
+          {selectedContent.type === 'series' && (
+            <button
+              onClick={() => {
+                const progress = getContentProgress(selectedContent.id);
+                if (progress && progress.seasonNumber && progress.episodeNumber) {
+                  playEpisode(selectedContent.id, progress.seasonNumber, progress.episodeNumber, false, '');
+                } else {
+                  playEpisode(selectedContent.id, 1, 1, false, '');
+                }
+              }}
+              className="w-full h-12 flex items-center justify-center gap-2 font-semibold transition-all rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+              data-testid="button-watch"
+            >
+              <Play size={18} fill="currentColor" />
+              <span>Assistir</span>
+            </button>
+          )}
+          <button
+            onClick={() => toggleFavorite(selectedContent)}
+            className={`w-full h-12 flex items-center justify-center gap-2 font-semibold transition-all rounded-lg ${
+              isInList
+              ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'
+              : 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'
+            } text-white`}
+            data-testid="button-favorite"
+          >
+            {isInList ? <Check size={18} /> : <Heart size={18} />}
+            <span>Favoritar</span>
+          </button>
+        </div>
+
+        {/* Seção com fundo escuro */}
+        <div className="bg-black">
+          <div className="px-6 md:px-12 pt-12 pb-10">
+            {/* Sinopse */}
+            <div className="text-center mb-8">
+              <p className="text-sm text-gray-400 leading-relaxed max-w-2xl mx-auto" data-testid="text-description">
+                {selectedContent.fullDescription}
+              </p>
             </div>
 
             {/* Linha de separação */}
-            <div className="w-full max-w-2xl mx-auto mb-8">
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
+            <div className="w-full max-w-xl mx-auto mb-8">
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
             </div>
 
-            {/* Atores na horizontal sem título */}
+            {/* Elenco */}
             <div className="w-full overflow-x-auto mb-8 scrollbar-hide">
               <div className="flex items-center gap-6 text-white justify-center min-w-max px-4">
                 {(selectedContent.cast as any[]).map((actor: any, index: number) => {
@@ -1276,7 +1385,7 @@ export default function StreamingApp() {
                         className="w-12 h-12 rounded-full object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = getActorImage(actorName); // Fallback to local image
+                          target.src = getActorImage(actorName);
                         }}
                       />
                       <span className="font-semibold whitespace-nowrap">{actorName}</span>
@@ -1285,53 +1394,10 @@ export default function StreamingApp() {
                 })}
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Seção com fundo escuro */}
-        <div className="bg-black">
-          <div className="px-6 md:px-12 pt-8 pb-10">
-            {/* Sinopse ainda menor */}
-            <div className="text-center mb-6">
-              <p className="text-sm text-gray-400 leading-relaxed max-w-2xl mx-auto" data-testid="text-description">
-                {selectedContent.fullDescription}
-              </p>
-            </div>
-
-            {/* Linha de separação */}
-            <div className="w-full max-w-xl mx-auto mb-6">
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
-            </div>
-
-            {/* Botões Assistir (apenas para filmes) e Favoritar */}
-            <div className="flex justify-center gap-4">
-              {selectedContent.type === 'movie' && (
-                <button
-                  onClick={() => handleWatchClick(selectedContent)}
-                  className="flex items-center space-x-2 px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:scale-105 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                  data-testid="button-watch"
-                >
-                  <Play size={18} fill="currentColor" />
-                  <span>Assistir</span>
-                </button>
-              )}
-              <button
-                onClick={() => toggleFavorite(selectedContent)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all shadow-lg hover:scale-105 ${
-                  isInList
-                  ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white'
-                  : 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white'
-                }`}
-                data-testid="button-favorite"
-              >
-                {isInList ? <Check size={18} /> : <Heart size={18} />}
-                <span>{isInList ? "Favorito" : "Favoritar"}</span>
-              </button>
-            </div>
-
-            {/* Linha de separação entre Botões e Episódios */}
+            {/* Linha de separação entre Elenco e Episódios */}
             {selectedContent.type === 'series' && (
-              <div className="w-full max-w-xl mx-auto mt-8 mb-6">
+              <div className="w-full max-w-xl mx-auto mb-8">
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
               </div>
             )}
@@ -1645,83 +1711,63 @@ export default function StreamingApp() {
     );
   }
 
+  // Use featured content with logos, fallback to regular featured content
+  const displayFeaturedContent = featuredWithLogos.length > 0 ? featuredWithLogos : featuredContent;
+  const currentFeatured = displayFeaturedContent[featuredIndex] || displayFeaturedContent[0];
+  const currentFeaturedForCarousel = currentFeatured as any;
+
   // Main home page view
   return (
     <div className="min-h-screen text-foreground pb-24 bg-black">
 
 
-      {/* Hero Section - Carousel Style */}
-      {activeCategory === "home" && currentFeatured && featuredContent.length > 0 && (
-        <div className="relative h-[65vh] overflow-hidden bg-black">
-          <div className="absolute inset-0 flex items-center justify-center px-4 py-4">
-            <div className="relative w-full max-w-7xl h-full flex items-center justify-center gap-4">
+      {/* Hero Section - Full Backdrop Carousel */}
+      {activeCategory === "home" && currentFeatured && displayFeaturedContent.length > 0 && (
+        <div 
+          className="relative h-[65vh] overflow-hidden bg-cover bg-center carousel-animate"
+          style={{ backgroundImage: `url(${currentFeatured.backdrop})` }}
+          key={featuredIndex}
+        >
+          {/* Full black overlay with reduced opacity */}
+          <div className="absolute inset-0 bg-black/50" />
 
-              {/* Previous Poster - Left Side (Small & Faded) */}
-              {featuredContent.length > 1 && (
-                <div className="z-0 w-32 md:w-40 lg:w-48 opacity-30 transition-all duration-300 flex-shrink-0">
-                  <img
-                    src={featuredContent[(featuredIndex - 1 + featuredContent.length) % featuredContent.length].poster}
-                    alt="Anterior"
-                    className="w-full h-auto rounded-xl shadow-xl"
-                  />
-                </div>
-              )}
+          {/* Bottom overlay - gradient transparent to black */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent" />
 
-              {/* Current Poster - Center (Medium Size & Sharp) */}
-              <div className="relative z-10 w-56 md:w-72 lg:w-80 transition-all duration-500 flex-shrink-0 carousel-animate" key={featuredIndex}>
+          {/* Content Container */}
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 px-4">
+            {/* Logo or Title */}
+            {currentFeaturedForCarousel.logo ? (
+              <div className="flex items-center justify-center mb-6 h-16 md:h-20">
                 <img
-                  src={currentFeatured.poster}
+                  src={currentFeaturedForCarousel.logo}
                   alt={currentFeatured.title}
-                  className="w-full h-auto rounded-3xl shadow-2xl subtle-float"
-                  data-testid="img-hero-poster"
+                  className="max-h-full max-w-full object-contain drop-shadow-lg"
                 />
-
-                {/* Info Overlay on Poster */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 md:p-6 rounded-b-3xl">
-                  <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3 text-white text-center" data-testid="text-hero-title">
-                    {currentFeatured.title}
-                  </h2>
-                  <div className="flex flex-wrap items-center justify-center gap-2 mb-2 md:mb-3">
-                    <span className="flex items-center space-x-1 bg-yellow-500/20 backdrop-blur-sm px-2 py-1 rounded-full border border-yellow-400/30">
-                      <IMDbIcon size={14} className="text-yellow-400" />
-                      <span className="text-xs font-bold text-white" data-testid="text-hero-rating">{currentFeatured.rating}</span>
-                    </span>
-                    <span className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full border border-white/20 text-xs font-semibold text-white" data-testid="text-hero-year">{currentFeatured.year}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => openDetails(currentFeatured)}
-                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-3 md:px-4 py-2 rounded-xl font-bold transition-all shadow-lg hover:scale-105 text-xs md:text-sm glow-pulse"
-                      data-testid="button-hero-watch"
-                    >
-                      <Play size={14} fill="currentColor" />
-                      <span>Assistir</span>
-                    </button>
-                    <button
-                      onClick={() => toggleFavorite(currentFeatured)}
-                      className={`flex items-center justify-center px-3 md:px-4 py-2 rounded-xl font-bold transition-all shadow-lg hover:scale-105 ${
-                        isInUserList(currentFeatured.id)
-                        ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white'
-                        : 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white'
-                      }`}
-                      data-testid="button-hero-list"
-                    >
-                      {isInUserList(currentFeatured.id) ? <Check size={14} /> : <Heart size={14} />}
-                    </button>
-                  </div>
-                </div>
               </div>
+            ) : (
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 text-center drop-shadow-lg">
+                {currentFeatured.title}
+              </h2>
+            )}
 
-              {/* Next Poster - Right Side (Small & Faded) */}
-              {featuredContent.length > 1 && (
-                <div className="z-0 w-32 md:w-40 lg:w-48 opacity-30 transition-all duration-300 flex-shrink-0">
-                  <img
-                    src={featuredContent[(featuredIndex + 1) % featuredContent.length].poster}
-                    alt="Próximo"
-                    className="w-full h-auto rounded-xl shadow-xl"
-                  />
-                </div>
-              )}
+            {/* Action Buttons */}
+            <div className="flex gap-6 justify-center items-center">
+              <button
+                onClick={() => toggleFavorite(currentFeatured)}
+                className="p-3 rounded-full font-bold transition-all shadow-lg hover:scale-110 text-lg bg-pink-500/20 hover:bg-pink-500/30 text-white border-2 border-pink-500/50"
+                data-testid="button-hero-list"
+              >
+                {isInUserList(currentFeatured.id) ? <Check size={24} /> : <Heart size={24} />}
+              </button>
+              <button
+                onClick={() => openDetails(currentFeatured)}
+                className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg hover:scale-105 text-lg"
+                data-testid="button-hero-watch"
+              >
+                <Play size={20} fill="currentColor" />
+                <span>Assistir</span>
+              </button>
             </div>
           </div>
         </div>
@@ -1768,11 +1814,11 @@ export default function StreamingApp() {
 
       {/* Content Grid */}
       <div className={`px-4 md:px-6 ${activeCategory === "home" ? "py-6" : "pt-6 pb-8"}`}>
-        <div className="space-y-8">
+        <div className="space-y-4">
           {activeCategory === "home" && (
             <>
               {/* Gradient: black -> dark gray -> black for Destaques */}
-              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6 py-10 bg-gradient-to-b from-black via-zinc-800 to-black">
+              <div className="relative -mx-4 md:-mx-6 px-4 md:px-6 py-6 bg-gradient-to-b from-black via-zinc-800 to-black">
                 <ContentSection
                   title="DESTAQUES"
                   items={featuredContent.slice(0, 50)}
@@ -1830,12 +1876,13 @@ export default function StreamingApp() {
 
           {activeCategory === "movies" && !selectedCategory && (
             <div className="space-y-8 slide-up">
-              {/* Header centralizado */}
-              <div className="flex justify-center items-center py-4">
-                <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent flex items-center gap-4">
-                  <Film className="w-12 h-12 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.8)]" />
-                  Filmes
-                </h2>
+              {/* Enhanced Genre Header */}
+              <div className="sticky top-0 z-40 -mx-4 md:-mx-6 -mt-6 bg-gradient-to-r from-gray-900/30 via-blue-900/30 to-gray-900/30 backdrop-blur-xl border-b border-gradient-to-r from-blue-500/40 to-blue-500/40 p-6 shadow-2xl mb-8">
+                <div className="max-w-4xl mx-auto text-center">
+                  <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-white via-blue-200 to-blue-200 bg-clip-text text-transparent">
+                    🎬 Filme
+                  </h1>
+                </div>
               </div>
 
               {/* Grid de categorias melhorado */}
@@ -1959,12 +2006,13 @@ export default function StreamingApp() {
 
           {activeCategory === "series" && !selectedCategory && (
             <div className="space-y-8 slide-up">
-              {/* Header centralizado */}
-              <div className="flex justify-center items-center py-4">
-                <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-300 via-purple-300 to-pink-300 bg-clip-text text-transparent flex items-center gap-4">
-                  <Tv className="w-12 h-12 text-purple-400 drop-shadow-[0_0_15px_rgba(192,132,252,0.8)]" />
-                  Séries
-                </h2>
+              {/* Enhanced Genre Header */}
+              <div className="sticky top-0 z-40 -mx-4 md:-mx-6 -mt-6 bg-gradient-to-r from-gray-900/30 via-purple-900/30 to-gray-900/30 backdrop-blur-xl border-b border-gradient-to-r from-purple-500/40 to-purple-500/40 p-6 shadow-2xl mb-8">
+                <div className="max-w-4xl mx-auto text-center">
+                  <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-white via-purple-200 to-purple-200 bg-clip-text text-transparent">
+                    📺 Série
+                  </h1>
+                </div>
               </div>
 
               {/* Grid de categorias melhorado */}
@@ -2194,8 +2242,6 @@ export default function StreamingApp() {
                 <div className="text-center py-20">
                   <Heart size={64} className="mx-auto mb-4 text-blue-500/50" />
                   <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent" data-testid="text-empty-list-title">Seus favoritos estão vazios</h3>
-                  <p className="text-gray-400 mb-4" data-testid="text-empty-list-description">Adicione filmes e séries aos seus favoritos</p>
-                  <p className="text-gray-500 text-sm">Clique no ❤️ em qualquer conteúdo para adicioná-lo aqui</p>
                 </div>
               )}
             </>
@@ -2369,58 +2415,16 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
     className={`group relative cursor-pointer streaming-card-hover ${compact ? 'w-full' : 'min-w-[180px] w-[180px] sm:min-w-[200px] sm:w-[200px] md:min-w-[220px] md:w-[220px]'}`}
     data-testid={`card-content-${item.id}`}
   >
-    <div className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 mb-4 border border-gray-700/50 backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-lg group-hover:shadow-blue-500/20">
+    <div 
+      className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 mb-4 border border-gray-700/50 backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-lg group-hover:shadow-blue-500/20 cursor-pointer"
+      onClick={onDetailsClick}
+    >
       <img
         src={getPosterImage(item.poster)}
         alt={item.title}
         className="w-full h-full object-cover transition-all duration-500"
         data-testid={`img-poster-${item.id}`}
       />
-
-      {/* Enhanced gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-      {/* Content overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
-        <div className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-          <div className={`flex justify-center ${compact ? 'space-x-2' : 'space-x-3'}`}>
-            <button
-              className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 ${compact ? 'p-2' : 'p-3'} rounded-full transition-all duration-300 hover:scale-110 shadow-lg`}
-              onClick={onPlayClick}
-              data-testid={`button-play-${item.id}`}
-              title="Assistir"
-            >
-              <Play size={compact ? 14 : 20} className="text-white" fill="currentColor" />
-            </button>
-            <button
-              className={`${compact ? 'p-2' : 'p-3'} rounded-full transition-all duration-300 hover:scale-110 shadow-lg ${
-                isInUserList
-                ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'
-                : 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'
-              }`}
-              onClick={onFavoriteClick}
-              data-testid={`button-favorite-${item.id}`}
-              title={isInUserList ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-            >
-              {isInUserList ? <Check size={compact ? 14 : 20} className="text-white" /> : <Heart size={compact ? 14 : 20} className="text-white" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Status badges - shows 'Legendado' if status contains 'Leg', 'Cam' if contains 'Cam' */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 flex flex-col gap-2 items-center">
-        {(item as ExtendedContent).status?.includes('Leg') && (
-          <span className="bg-orange-600 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-testid={`text-leg-${item.id}`}>
-            Legendado
-          </span>
-        )}
-        {(item as ExtendedContent).status?.includes('Cam') && (
-          <span className="bg-blue-900 text-white text-xs px-4 py-1.5 rounded-full font-bold whitespace-nowrap" data-testid={`text-cam-${item.id}`}>
-            Gravação de Cinema
-          </span>
-        )}
-      </div>
     </div>
 
     {/* Content info */}
@@ -2432,12 +2436,18 @@ const ContentCard = ({ item, onDetailsClick, onPlayClick, onFavoriteClick, isInU
       >
         {item.title}
       </h4>
-      <div className="flex items-center justify-center space-x-2">
-        <div className="flex items-center space-x-1">
-          <IMDbIcon size={10} className="text-yellow-400" />
-          <span className="text-white font-semibold text-xs" data-testid={`text-rating-${item.id}`}>{item.rating}</span>
-        </div>
-        <span className="text-gray-400 font-medium text-xs" data-testid={`text-year-${item.id}`}>{item.year}</span>
+      {/* Status tags moved here */}
+      <div className="flex flex-wrap justify-center gap-2 mb-1">
+        {(item as ExtendedContent).status?.includes('Leg') && (
+          <span className="bg-orange-600/80 text-white text-[10px] px-2 py-0.5 rounded-full font-bold backdrop-blur-sm" data-testid={`text-leg-${item.id}`}>
+            Legendado
+          </span>
+        )}
+        {(item as ExtendedContent).status?.includes('Cam') && (
+          <span className="bg-blue-900/80 text-white text-[10px] px-2 py-0.5 rounded-full font-bold backdrop-blur-sm whitespace-nowrap" data-testid={`text-cam-${item.id}`}>
+            Gravação de Cinema
+          </span>
+        )}
       </div>
     </div>
   </div>
